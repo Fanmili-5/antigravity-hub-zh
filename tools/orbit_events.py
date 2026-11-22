@@ -7,6 +7,8 @@ import stat
 import sys
 from pathlib import Path
 
+MAX_EVENT_BYTES = 1024 * 1024
+
 
 def socket_path():
     parent = Path(f"/tmp/agy-hub-pet-{os.getuid()}")
@@ -37,11 +39,12 @@ def workspace_label(data):
     for path in paths:
         if not isinstance(path, str) or not 0 < len(path) <= 4096 or "\x00" in path:
             continue
+        workspace = Path(path)
         try:
-            encoded_path = path.encode("utf-8")
+            encoded_path = str(workspace).encode("utf-8")
         except UnicodeEncodeError:
             continue
-        name = "".join(character for character in Path(path).name if character.isprintable()).strip()[:40]
+        name = "".join(character for character in workspace.name if character.isprintable()).strip()[:40]
         return {"group": hashlib.sha256(encoded_path).hexdigest()[:20], "label": name or "工作区"}
     return None
 
@@ -49,7 +52,8 @@ def workspace_label(data):
 def hook(event):
     response = {"decision": ""} if event == "stop" else {}
     try:
-        data = json.loads(sys.stdin.buffer.read(1_048_577))
+        raw = sys.stdin.buffer.read(MAX_EVENT_BYTES + 1)
+        data = json.loads(raw) if len(raw) <= MAX_EVENT_BYTES else None
         session = data.get("conversationId") if isinstance(data, dict) else None
         if isinstance(session, str) and 0 < len(session) <= 256:
             identifier = hashlib.sha256(session.encode()).hexdigest()[:20]

@@ -1,28 +1,6 @@
 import AppKit
 import Darwin
 
-enum Mood: String {
-    case idle, thinking, done, error
-
-    var label: String {
-        switch self {
-        case .idle: return "待机"
-        case .thinking: return "正在思考"
-        case .done: return "已完成"
-        case .error: return "需要查看"
-        }
-    }
-
-    var tint: NSColor {
-        switch self {
-        case .idle: return NSColor(srgbRed: 0.52, green: 0.82, blue: 0.70, alpha: 1)
-        case .thinking: return NSColor(srgbRed: 0.65, green: 0.70, blue: 1, alpha: 1)
-        case .done: return NSColor(srgbRed: 1, green: 0.79, blue: 0.46, alpha: 1)
-        case .error: return NSColor(srgbRed: 1, green: 0.60, blue: 0.58, alpha: 1)
-        }
-    }
-}
-
 final class OrbitView: NSView {
     var onActivate: (() -> Void)?
     private var dragStart: NSPoint?
@@ -334,11 +312,28 @@ final class PetApp: NSObject, NSApplicationDelegate {
 
     @objc private func openHub() {
         guard let app = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.google.antigravity") else {
-            NSSound.beep()
+            showHubError("请先安装 Antigravity Hub。可以继续预览套装和使用桌宠。")
             return
         }
         details.performClose(nil)
-        NSWorkspace.shared.openApplication(at: app, configuration: .init())
+        NSWorkspace.shared.openApplication(at: app, configuration: .init()) { [weak self] _, error in
+            guard let error else { return }
+            DispatchQueue.main.async { self?.showHubError(error.localizedDescription) }
+        }
+    }
+
+    private func showHubError(_ message: String) {
+        details.performClose(nil)
+        let alert = NSAlert()
+        alert.messageText = "无法打开 Antigravity Hub"
+        alert.informativeText = message
+        alert.addButton(withTitle: "好")
+        if let workbench, workbench.isVisible {
+            alert.beginSheetModal(for: workbench)
+        } else {
+            NSApp.activate(ignoringOtherApps: true)
+            alert.runModal()
+        }
     }
 
     private func updateDetails() {

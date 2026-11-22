@@ -1,5 +1,27 @@
-import Foundation
+import AppKit
 import Combine
+
+enum Mood: String {
+    case idle, thinking, done, error
+
+    var label: String {
+        switch self {
+        case .idle: return "待机"
+        case .thinking: return "正在思考"
+        case .done: return "已完成"
+        case .error: return "需要查看"
+        }
+    }
+
+    var tint: NSColor {
+        switch self {
+        case .idle: return NSColor(srgbRed: 0.52, green: 0.82, blue: 0.70, alpha: 1)
+        case .thinking: return NSColor(srgbRed: 0.65, green: 0.70, blue: 1, alpha: 1)
+        case .done: return NSColor(srgbRed: 1, green: 0.79, blue: 0.46, alpha: 1)
+        case .error: return NSColor(srgbRed: 1, green: 0.60, blue: 0.58, alpha: 1)
+        }
+    }
+}
 
 struct WorkspaceTag: Decodable {
     let group: String
@@ -21,9 +43,14 @@ struct ActivitySession: Identifiable {
     let workspace: String
     let mood: Mood
     let started: Date
+    let ended: Date?
     let updated: Date
     let expires: TimeInterval
     let updatedUptime: TimeInterval
+
+    func duration(at date: Date) -> Int {
+        max(0, Int((ended ?? date).timeIntervalSince(started)))
+    }
 }
 
 struct ActivityGroup: Identifiable {
@@ -49,11 +76,12 @@ final class LiveActivity: ObservableObject {
             }.first?.id
             if let oldest { records.removeValue(forKey: oldest) }
         }
-        let continues = previous?.mood == .thinking
+        let startsRun = mood == .thinking && previous?.mood != .thinking
         let expires = uptime + (mood == .thinking ? 900 : 3600)
         records[id] = ActivitySession(
             id: id, group: tag?.group ?? previous?.group ?? "", workspace: tag?.label ?? previous?.workspace ?? "未标记工作区",
-            mood: mood, started: continues ? (previous?.started ?? date) : date, updated: date,
+            mood: mood, started: startsRun ? date : (previous?.started ?? date),
+            ended: mood == .thinking ? nil : (previous?.ended ?? date), updated: date,
             expires: expires, updatedUptime: uptime
         )
         nextExpiry = min(nextExpiry, expires)

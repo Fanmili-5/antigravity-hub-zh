@@ -12,3 +12,20 @@
 4. 运行 `python3 -B -m unittest discover -s tests` 和 `./install.sh --check`。如有实机测试，请说明验证过的版本和入口。
 
 原生针对本地 JavaScript 字符串字面量使用 `--native-literal`，Electron 菜单标签使用 `--menu-label`，托盘计数字段使用 `--tray-expression`。这些模式只输出 SHA-256，输入和原版应用留在你的电脑上。公开测试使用原创的模拟菜单和 DOM 数据。
+
+## 验证工作台和桌宠改动
+
+在 macOS 的源码目录运行以下检查。它们会构建本地工作台并在临时目录生成套装和 HTML 预览。
+
+```bash
+python3 -B -m unittest discover -s tests
+node --test tests/test_skin.cjs
+python3 -B pet.py build
+suite_dir="$(mktemp -d)"
+xcrun swiftc pet/Activity.swift tests/ActivityTests.swift -o "$suite_dir/activity"
+"$suite_dir/activity"
+python3 -B pack.py export fjord "$suite_dir/fjord.zip"
+python3 -B pack.py preview "$suite_dir/fjord.zip" --out "$suite_dir/fjord.html"
+```
+
+界面改动请从菜单栏打开工作台，检查深浅外观、键盘操作、导入后预览、应用、撤回和导出。涉及活动时，用临时工作区验证启用、停用及等待 Hook 审查时的提示。涉及皮肤运行时时，记录测试的 Hub 版本，并检查聊天进入设置后恢复实色、返回聊天后壁纸和磨砂恢复。

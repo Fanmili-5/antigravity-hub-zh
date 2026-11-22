@@ -56,6 +56,14 @@ struct PetAssets {
     }
 
     static func load(_ directory: URL) throws -> PetAssets {
+        let (manifest, images) = try readAtlas(directory)
+        return PetAssets(name: manifest.name, frames: images.map {
+            NSImage(cgImage: $0, size: NSSize(width: tile, height: tile))
+        })
+    }
+
+    // The CLI validates Core Graphics images without creating AppKit objects.
+    fileprivate static func readAtlas(_ directory: URL) throws -> (PetManifest, [CGImage]) {
         let config = try Data(contentsOf: directory.appendingPathComponent("pet.json"))
         guard config.count <= 4096 else { throw PetAssetError.message("桌宠清单过大。") }
         let manifest = try JSONDecoder().decode(PetManifest.self, from: config)
@@ -74,9 +82,7 @@ struct PetAssets {
         guard images.allSatisfy({ bounds($0, threshold: 20) != nil }) else {
             throw PetAssetError.message("至少有一个状态缺少可见角色。")
         }
-        return PetAssets(name: manifest.name, frames: images.map {
-            NSImage(cgImage: $0, size: NSSize(width: tile, height: tile))
-        })
+        return (manifest, images)
     }
 
     static func prepare(input: URL, output: URL, manifest: PetManifest, keepBackground: Bool) throws {
@@ -141,7 +147,7 @@ struct PetAssets {
         let json = JSONEncoder()
         json.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
         try json.encode(manifest).write(to: output.appendingPathComponent("pet.json"), options: .atomic)
-        _ = try load(output)
+        _ = try readAtlas(output)
     }
 
     private static func split(_ image: CGImage, count: Int) throws -> [CGImage] {
@@ -229,8 +235,8 @@ func runAssetCommand(_ args: [String]) -> Bool {
                 throw PetAssetError.message("壁纸需为 2560 px 以内、可解码的静态 JPEG。")
             }
         } else if command == "--validate-pet", args.count == 2 {
-            let pet = try PetAssets.load(URL(fileURLWithPath: args[1], isDirectory: true))
-            print(pet.animatedPoses ? "四姿势图集" : "单张角色图")
+            let (manifest, _) = try PetAssets.readAtlas(URL(fileURLWithPath: args[1], isDirectory: true))
+            print(manifest.layout == "poses" ? "四姿势图集" : "单张角色图")
         } else if command == "--prepare-pet", args.count == 6 {
             try PetAssets.prepare(
                 input: URL(fileURLWithPath: args[1]), output: URL(fileURLWithPath: args[2], isDirectory: true),

@@ -5,30 +5,53 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>__NAME__ · 套装预览</title>
 <style>
-:root{--ink:#263348;--accent:__TINT__;--blur:__BLUR__px;--veil:__VEIL__}
+:root{color-scheme:light dark;--base:#fafafa;--page:#eef2f8;--ink:#263348;--muted:#465972;--accent:__TINT__;--blur:__BLUR__px;--veil:__VEIL__;--panel:__PANEL__%}
+@media(prefers-color-scheme:dark){:root{--base:#17191f;--page:#1f232c;--ink:#f0f3fb;--muted:#c2cee3}}
 *{box-sizing:border-box}
-body{margin:0;background:#eef2f8;color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
+body{margin:0;background:var(--page);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
 main{max-width:980px;margin:auto;padding:clamp(22px,5vw,52px) 20px}
 h1{font-size:clamp(27px,5vw,44px);margin:0;line-height:1.2;overflow-wrap:anywhere}
-p{margin:8px 0 20px;color:#465972}
-section{position:relative;isolation:isolate;overflow:hidden;min-height:420px;border-radius:22px;display:grid;align-items:end;grid-template-columns:minmax(150px,.85fr) minmax(180px,1.5fr);gap:18px;padding:clamp(14px,4vw,34px);background:#a7adc8}
-section::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(rgb(245 247 255/var(--veil)),rgb(245 247 255/var(--veil))),url(data:image/jpeg;base64,__PICTURE__) center/cover no-repeat}
-.glass{padding:18px;border:1px solid #ffffff96;min-height:120px;background:rgb(250 251 255/.24);backdrop-filter:blur(var(--blur));border-radius:15px}
+p{margin:8px 0 20px;color:var(--muted)}
+section{position:relative;isolation:isolate;overflow:hidden;min-height:420px;border-radius:22px;display:grid;align-items:end;grid-template-columns:minmax(150px,.85fr) minmax(180px,1.5fr);gap:18px;padding:clamp(14px,4vw,34px);background:var(--base)}
+.jade{--art:radial-gradient(ellipse at 22% 23%,#a4eed5 0%,transparent 44%),radial-gradient(ellipse at 84% 67%,#2c867c 0%,transparent 66%),linear-gradient(143deg,#12384d,#6fa090 52%,#233b69)}
+.dusk{--art:radial-gradient(ellipse at 70% 22%,#a8a8ef 0%,transparent 42%),radial-gradient(ellipse at 10% 65%,#356470 0%,transparent 65%),linear-gradient(130deg,#253854,#4a4585 56%,#151431)}
+.sand{--art:radial-gradient(ellipse at 23% 76%,#96758c 0%,transparent 60%),radial-gradient(ellipse at 85% 30%,#ffc38a 0%,transparent 65%),linear-gradient(160deg,#634a71,#ce856d 63%,#463353)}
+section::before,section::after{content:"";position:absolute;inset:0;z-index:-1}
+section::before{background:var(--art)}
+.wallpaper::before{background:url(data:image/jpeg;base64,__PICTURE__) center/cover no-repeat,var(--art)}
+section::after{background:var(--base);opacity:var(--veil)}
+.glass{padding:18px;border:1px solid var(--accent);border-color:color-mix(in srgb,var(--accent) 28%,transparent);background:color-mix(in srgb,var(--base) var(--panel),transparent);-webkit-backdrop-filter:blur(var(--blur));backdrop-filter:blur(var(--blur));border-radius:15px}
 .glass strong{display:block;margin-bottom:6px}
 .pet{background-image:url(data:image/png;base64,__ATLAS__);background-size:100%;aspect-ratio:1;width:100%;max-width:280px;justify-self:center;filter:drop-shadow(0 12px 10px #1d2c4d3d)}
-.poses .pet{background-size:200% 200%}
+.poses .pet{background-size:200% 200%;background-position:0 0}
+.poses:has(#thinking:checked) .pet{background-position:100% 0}
+.poses:has(#done:checked) .pet{background-position:0 100%}
+.poses:has(#review:checked) .pet{background-position:100% 100%}
+fieldset{border:0;margin:12px 0 0;padding:0;min-width:0}
+.portrait fieldset{display:none}
+legend{margin-bottom:4px;color:var(--muted);padding:0}
+label{display:inline-flex;align-items:center;gap:4px;margin-inline-end:8px}
+input{accent-color:var(--accent)}
 dl{display:flex;gap:16px;flex-wrap:wrap;margin:0}
-dt{color:#45566c}
+dt{color:var(--muted)}
 dd{margin:0;font-weight:650;font-variant-numeric:tabular-nums}
-@media(max-width:560px){section{grid-template-columns:1fr;min-height:320px}.pet{max-width:150px;grid-row:1}.glass{min-height:auto}}
+@media(max-width:560px){section{grid-template-columns:1fr;min-height:320px}.pet{max-width:150px;grid-row:1}}
 </style>
 </head>
 <body>
 <main><h1>__NAME__</h1><p>外观套装预览</p>
-<section class="__LAYOUT__" aria-label="壁纸、磨砂与桌宠组合">
-  <div class="glass"><strong>__PET__</strong><dl><div><dt>遮罩</dt><dd id="veil"></dd></div><div><dt>磨砂</dt><dd>__BLUR__ px</dd></div></dl></div>
+<section class="__LAYOUT__ __ART__ __WALLPAPER__" aria-label="壁纸、磨砂与桌宠组合">
+  <div class="glass">
+    <strong>__PET__</strong>
+    <dl><div><dt>遮罩</dt><dd>__VEIL_PERCENT__%</dd></div><div><dt>磨砂</dt><dd>__BLUR__ px</dd></div></dl>
+    <fieldset><legend>桌宠姿势</legend>
+      <label><input type="radio" name="pose" id="idle" checked>待机</label>
+      <label><input type="radio" name="pose" id="thinking">思考</label>
+      <label><input type="radio" name="pose" id="done">完成</label>
+      <label><input type="radio" name="pose" id="review">需查看</label>
+    </fieldset>
+  </div>
   <div class="pet" role="img" aria-label="__PET__"></div>
 </section></main>
-<script>document.getElementById("veil").textContent=Math.round(__VEIL__*100)+"%";</script>
 </body>
 </html>

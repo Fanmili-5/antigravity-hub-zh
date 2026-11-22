@@ -2,7 +2,7 @@
 
 ## 皮肤
 
-先安装当前版本的 Hub 补丁并重开 Hub，即可运行下方命令切换壁纸和玻璃材质。Hub 2.34.0 已实测导入本地图片、即时切换、输入区和侧栏磨砂。其他版本的显示范围仍待验证。
+先安装当前版本的 Hub 补丁并重开 Hub，即可运行下方命令切换壁纸和玻璃材质。Hub 2.34.0 已实测导入本地图片、即时切换、聊天输入区和侧栏磨砂。打开设置时侧栏和内容区恢复实色，返回聊天后壁纸和磨砂恢复。其他版本的显示范围仍待验证。
 
 换肤时，侧栏使用连续的玻璃底色，壁纸延伸到输入框边缘。关掉皮肤后恢复客户端的默认外观。
 
@@ -45,7 +45,7 @@ python3 pet.py enable "/path/to/workspace"
 python3 pet.py disable "/path/to/workspace"
 ```
 
-Hub 通过该项目的 `.agents/hooks.json` 加载 `PreInvocation` 和 `Stop`。如 Hub 显示工作区 Hook 审查，在设置的「扩展 / Hooks」里按需确认。Hook 通过 Unix 域套接字传递状态与临时会话标识，Hub 2.34.0 已用真实测试会话验证从思考到完成。桌宠关着时 Hook 正常返回。移走源码目录前先停用工作区联动，因为 Hook 引用源码目录的绝对路径。
+Hub 通过项目的 `.agents/hooks.json` 加载 `PreInvocation` 和 `Stop`。如果 Hub 提示审查，可在设置的「扩展 / Hooks」里确认。Hook 通过本机套接字传递状态和临时会话标识，桌宠关闭时也能正常返回。Hub 2.34.0 已用真实会话验证从思考到完成。当前 Hook 脚本位于 `~/Library/Application Support/Antigravity Hub Tools`。如果旧版 Hook 仍指向原解压目录，切换源码目录前先在原目录停用联动，再从新源码启用。
 
 ## 设计参考
 

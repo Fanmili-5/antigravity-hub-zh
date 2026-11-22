@@ -77,7 +77,7 @@
 
 ## 外观套装和桌宠
 
-首次构建原生工作台或桌宠需要 Xcode Command Line Tools。壁纸和磨砂在装有本项目补丁的 Hub 中生效。
+工作台和桌宠可独立运行。首次启动需要 Python 3.9+ 和 Xcode Command Line Tools，会在本机编译 `dist/Orbit Pet.app`。如缺少编译工具，先运行 `xcode-select --install`。启动后可从菜单栏星形图标打开工作台。壁纸和磨砂在装有本项目补丁的 Hub 聊天页生效。
 
 | 想做什么 | 在源码目录执行 |
 | --- | --- |

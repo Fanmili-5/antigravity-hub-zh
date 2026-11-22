@@ -1,4 +1,5 @@
 import json
+import os
 import stat
 import tempfile
 import unittest
@@ -11,6 +12,35 @@ from tools.local_config import read_object, revision, write_object
 
 
 class PackTests(unittest.TestCase):
+    def test_archive_must_be_a_regular_file(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            pipe = Path(temporary) / "stream.zip"
+            os.mkfifo(pipe)
+            with self.assertRaisesRegex(ValueError, "普通"):
+                pack.read_archive(pipe)
+
+    def test_export_never_follows_an_existing_destination_symlink(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            folder = Path(temporary)
+            destination, target = folder / "alias.zip", folder / "missing.zip"
+            destination.symlink_to(target)
+            with self.assertRaises(FileExistsError):
+                pack.export_pack(pack.demo_payload(), destination)
+            self.assertFalse(target.exists())
+            self.assertTrue(destination.is_symlink())
+
+    def test_preview_handles_a_pack_without_a_wallpaper(self):
+        files = pack.demo_payload()
+        manifest = pack.verify_payload(files)
+        manifest["name"] = "风格 <演示>"
+        entries = pack.payload(manifest, None, {path.removeprefix("pet/"): files[path]
+                                                  for path in ("pet/pet.json", "pet/atlas.png")})
+        with tempfile.TemporaryDirectory() as temporary, patch.object(pack, "validate_images"):
+            preview = pack.preview_pack(entries, Path(temporary) / "preview.html").read_text()
+            self.assertIn("风格 &lt;演示&gt;", preview)
+            self.assertIn(f'class="poses {manifest["skin"]["art"]} "', preview)
+            self.assertNotIn("__WALLPAPER__", preview)
+
     def test_fixture_round_trips_and_reexports_identically(self):
         files = pack.demo_payload()
         self.assertEqual(pack.verify_payload(files)["name"], "峡湾 · 极地向导")

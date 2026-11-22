@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import base64
+import fcntl
 import hashlib
 import html
 import json
@@ -77,7 +78,10 @@ def configure(workspace, enabled):
         raise ValueError("同名 Hook 属于其他源码目录或已有自定义配置，请先在原目录停用它。")
     if enabled:
         install_hook_script()
-        hooks[HOOK_NAME] = hook_commands()
+        commands = hook_commands()
+        if existing == commands:
+            return config
+        hooks[HOOK_NAME] = commands
     elif HOOK_NAME in hooks:
         del hooks[HOOK_NAME]
     else:
@@ -87,6 +91,17 @@ def configure(workspace, enabled):
 
 
 def build():
+    if sys.platform != "darwin":
+        raise ValueError("菜单栏工作台和桌宠需要 macOS。")
+    if sys.version_info < (3, 9):
+        raise ValueError("菜单栏工作台和桌宠需要 Python 3.9 或更高版本。")
+    BUILD.mkdir(exist_ok=True)
+    with (BUILD / ".orbit-build.lock").open("a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        return _build_locked()
+
+
+def _build_locked():
     sources = [ROOT / "pet" / name for name in ("main.swift", "Assets.swift", "Activity.swift", "Workbench.swift")]
     manifest = ROOT / "pet/Info.plist"
     assets = [EXAMPLE / name for name in PET_FILES]
@@ -100,13 +115,14 @@ def build():
     ).hexdigest()
     build_mark = APP / "Contents/Resources/source.sha256"
     executable = APP / "Contents/MacOS/orbit-pet"
-    if executable.is_file() and build_mark.is_file() and build_mark.read_text() == fingerprint:
+    if executable.is_file() and os.access(executable, os.X_OK) and build_mark.is_file() and build_mark.read_text() == fingerprint:
         return APP
-    if sys.platform != "darwin":
-        raise ValueError("桌宠需在 macOS 上构建。")
-    if send("ping", "manual"):
-        raise ValueError("桌宠正在运行，请先用 pet.py stop 退出再重建。")
-    BUILD.mkdir(exist_ok=True)
+    if APP.exists() and send("ping", "manual"):
+        raise ValueError("请从菜单栏退出正在运行的桌宠，再构建新版工作台。")
+    compiler = subprocess.run(["/usr/bin/xcrun", "--find", "swiftc"], capture_output=True)
+    if compiler.returncode != 0:
+        raise ValueError("找不到 Swift 编译器。请在终端运行 xcode-select --install，安装完成后重试。")
+    print("正在本机编译菜单栏工作台和桌宠…", file=sys.stderr)
     with tempfile.TemporaryDirectory(dir=BUILD, prefix=".orbit-build-") as staging:
         candidate = Path(staging) / APP.name
         contents = candidate / "Contents"
@@ -121,13 +137,19 @@ def build():
             bundled.parent.mkdir(parents=True, exist_ok=True)
             bundled.write_bytes(file.read_bytes())
         (contents / "Resources/WorkbenchDriver.json").write_bytes(driver)
-        subprocess.run(["/usr/bin/xcrun", "swiftc", "-O", "-module-cache-path", Path(staging) / "cache",
+        subprocess.run(["/usr/bin/xcrun", "swiftc", "-O", "-module-cache-path", BUILD / ".swift-cache",
                         *sources, "-o", contents / "MacOS/orbit-pet"], check=True)
         (contents / "Resources/source.sha256").write_text(fingerprint)
         subprocess.run(["/usr/bin/codesign", "--sign", "-", "--force", candidate], check=True)
+        previous = Path(staging) / "previous.app"
         if APP.exists():
-            APP.rename(Path(staging) / "previous.app")
-        candidate.rename(APP)
+            APP.rename(previous)
+        try:
+            candidate.rename(APP)
+        except OSError:
+            if previous.exists():
+                previous.rename(APP)
+            raise
     return APP
 
 
