@@ -13,13 +13,13 @@ PNG_FILES = (
     "pet/examples/gugugaga/atlas.png",
     "pet/examples/gugugaga-slate/atlas.png",
 )
-JPEG_FILES = ("packs/fjord/wallpaper.jpg", "docs/images/fjord-preview.jpg")
+JPEG_FILES = ("packs/fjord/wallpaper.jpg", "docs/images/fjord-preview.jpg", "docs/images/toolkit-overview.jpg")
 FILES = (
     ".gitignore", ".github/ISSUE_TEMPLATE/feedback.yml",
     ".agents/skills/antigravity-hub-zh/SKILL.md",
     ".agents/skills/antigravity-hub-tools/SKILL.md",
     "LICENSE", "README.md", "CONTRIBUTING.md", "CHANGELOG.md",
-    "docs/RELEASE_NOTES.md", "docs/CUSTOMIZATIONS.md", "docs/PET_STUDIO.md", "docs/WORKBENCH.md",
+    "docs/README.en.md", "docs/RELEASE_NOTES.md", "docs/CUSTOMIZATIONS.md", "docs/PET_STUDIO.md", "docs/WORKBENCH.md",
     "asar_patch.py", "build_patch.py", "manage_patch.py", "native_patch.py",
     "install.sh", "restore.sh", "i18n_zh.js", "menu_zh.js", "translations.json",
     "theme.py", "themes/presets.json", "themes/runtime.js",
