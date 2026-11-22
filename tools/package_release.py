@@ -6,6 +6,10 @@ from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "0.1.0-alpha.7"
 PNG_FILES = (
+    "docs/images/localization-original.png",
+    "docs/images/localization-zh.png",
+    "docs/images/fjord-live.png",
+    "docs/images/orbit-activity.png",
     "pet/examples/gugugaga/atlas.png",
     "pet/examples/gugugaga-slate/atlas.png",
 )
