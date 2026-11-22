@@ -1,0 +1,34 @@
+name: Source checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - run: python3 -B -m unittest discover -s tests
+      - run: node --check i18n_zh.js && node --check menu_zh.js
+      - run: node --test tests/test_skin.cjs
+      - run: bash -n install.sh && bash -n restore.sh
+      - run: python3 -B tools/package_release.py --output-dir /tmp/source-release
+  macos-workbench:
+    runs-on: macos-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Build native workbench
+        run: python3 -B pet.py build
+      - name: Verify activity, pack export, and pet assets
+        run: |
+          suite_dir="$(mktemp -d)"
+          xcrun swiftc pet/Activity.swift tests/ActivityTests.swift -o "$suite_dir/activity"
+          "$suite_dir/activity"
+          python3 -B pack.py export fjord "$suite_dir/fjord.zip"
+          python3 -B pack.py preview "$suite_dir/fjord.zip" --out "$suite_dir/fjord.html"
+          python3 -B pet.py create pet/examples/gugugaga-slate/atlas.png "$suite_dir/pet" --name "Fixture" --sheet
+          python3 -B pet.py preview "$suite_dir/pet" --out "$suite_dir/pet.html"

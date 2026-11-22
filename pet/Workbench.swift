@@ -12,6 +12,13 @@ private struct PackEntry: Decodable, Identifiable {
         let blur: Int
         let veil: Int
         let tint: String
+
+        var accent: Color {
+            guard let rgb = UInt32(tint.dropFirst(), radix: 16) else { return .accentColor }
+            return Color(red: Double((rgb >> 16) & 255) / 255,
+                         green: Double((rgb >> 8) & 255) / 255,
+                         blue: Double(rgb & 255) / 255)
+        }
     }
 
     let id: String
@@ -70,26 +77,33 @@ private final class WorkbenchRuntime {
     deinit { try? FileManager.default.removeItem(at: temporary) }
 }
 
-private final class PackStore: ObservableObject {
+private final class PackStore: NSObject, ObservableObject, NSOpenSavePanelDelegate {
     @Published private(set) var library = PackLibrary(packs: [], active: nil, skin: nil)
     @Published var selected: String? {
         didSet {
             guard oldValue != selected else { return }
+            previewMood = .idle
             loadArt()
         }
     }
     @Published private(set) var wallpaper: NSImage?
-    @Published private(set) var pet: NSImage?
-    @Published private(set) var petName = ""
+    @Published private(set) var pet: PetAssets?
+    @Published var previewMood = Mood.idle
     @Published private(set) var busy = false
     @Published private(set) var message = ""
     @Published private(set) var failed = false
     private let driver = Driver.load()
+    private var showingPanel = false
+    private var refreshQueued = false
 
     var entry: PackEntry? { library.packs.first { $0.id == selected } }
 
-    func refresh() {
-        perform(["list", "--json"]) { [weak self] data in
+    func refresh(preserveMessage: Bool = true) {
+        if busy || showingPanel {
+            refreshQueued = true
+            return
+        }
+        perform(["list", "--json"], preserveMessage: preserveMessage) { [weak self] data in
             try self?.receive(data, prefer: nil)
         }
     }
@@ -97,16 +111,18 @@ private final class PackStore: ObservableObject {
     private func receive(_ data: Data, prefer: String?) throws {
         library = try JSONDecoder().decode(PackLibrary.self, from: data)
         let choices = [prefer, selected, library.active].compactMap { $0 }
-        selected = choices.first(where: { candidate in library.packs.contains { $0.id == candidate } })
+        let next = choices.first(where: { candidate in library.packs.contains { $0.id == candidate } })
             ?? library.packs.first?.id
-        loadArt()
+        if selected == next {
+            loadArt()
+        } else {
+            selected = next
+        }
     }
 
     private func loadArt() {
         wallpaper = entry?.wallpaperPath.flatMap { NSImage(contentsOfFile: $0) }
-        let assets = entry.flatMap { try? PetAssets.load(URL(fileURLWithPath: $0.petPath, isDirectory: true)) }
-        pet = assets?.image(for: .idle)
-        petName = assets?.name ?? ""
+        pet = entry.flatMap { try? PetAssets.load(URL(fileURLWithPath: $0.petPath, isDirectory: true)) }
     }
 
     func apply() {
@@ -129,41 +145,42 @@ private final class PackStore: ObservableObject {
         picker.allowedContentTypes = [.zip]
         picker.canChooseDirectories = false
         present(picker) { [weak self] file in
-            guard let self else { return }
-            let copy = self.temporaryArchive()
-            do {
-                guard let bytes = try file.resourceValues(forKeys: [.fileSizeKey]).fileSize,
-                      bytes <= 12 * 1024 * 1024 else {
-                    throw CommandError.failed("套装 ZIP 超出大小限制。")
-                }
-                try FileManager.default.copyItem(at: file, to: copy)
-                self.perform(["import", copy.path], refreshLibrary: true, preferCommandOutput: true,
-                             cleanup: { try? FileManager.default.removeItem(at: copy) }) { [weak self] _ in
-                    self?.message = "已导入。现在可以预览并应用。"
-                }
-            } catch {
-                try? FileManager.default.removeItem(at: copy)
-                self.fail(error)
+            self?.perform(["import", file.path], refreshLibrary: true, preferCommandOutput: true) { [weak self] _ in
+                self?.message = "已导入。现在可以预览并应用。"
             }
         }
     }
 
     func exportFile(current: Bool) {
-        guard let entry else { return }
+        guard let reference = current ? "current" : entry?.id else { return }
         let panel = NSSavePanel()
         panel.title = current ? "导出当前外观" : "导出选中的套装"
         panel.prompt = "导出"
         panel.allowedContentTypes = [.zip]
-        panel.nameFieldStringValue = (current ? "我的反重力外观" : entry.name) + ".zip"
+        panel.delegate = self
+        let name = current ? "我的反重力外观" : (entry?.name ?? "外观套装")
+        panel.nameFieldStringValue = name.replacingOccurrences(of: "/", with: "／")
+            .replacingOccurrences(of: ":", with: "：") + ".zip"
         present(panel) { [weak self] file in
             guard let self else { return }
-            let output = self.temporaryArchive()
-            var command = ["export", current ? "current" : entry.id, output.path]
-            if current { command += ["--name", file.deletingPathExtension().lastPathComponent] }
-            self.perform(command, cleanup: { try? FileManager.default.removeItem(at: output) }) { [weak self] _ in
-                try FileManager.default.moveItem(at: output, to: file)
-                self?.message = "已导出 \(file.lastPathComponent)"
+            do {
+                let staging = try WorkbenchRuntime.shared.get().directory
+                    .appendingPathComponent(UUID().uuidString + ".zip")
+                var args = ["export", reference, staging.path]
+                if current { args.append("--name=\(file.deletingPathExtension().lastPathComponent)") }
+                self.perform(args, cleanup: { try? FileManager.default.removeItem(at: staging) }) { [weak self] _ in
+                    try FileManager.default.moveItem(at: staging, to: file)
+                    self?.message = "已导出 \(file.lastPathComponent)"
+                }
+            } catch {
+                self.fail(error)
             }
+        }
+    }
+
+    func panel(_ sender: Any, validate url: URL) throws {
+        if FileManager.default.fileExists(atPath: url.path) {
+            throw CommandError.failed("已有同名文件，请为套装选择新的文件名。")
         }
     }
 
@@ -175,20 +192,29 @@ private final class PackStore: ObservableObject {
         picker.canChooseDirectories = true
         present(picker) { [weak self] directory in
             self?.perform([enable ? "enable" : "disable", directory.path], script: "pet.py") { [weak self] _ in
-                self?.message = enable ? "工作区已启用联动" : "工作区已停用联动"
+                let name = directory.lastPathComponent
+                self?.message = enable ? "已为「\(name)」写入 Hook。如 Hub 提示审查，请在那里确认。"
+                    : "「\(name)」的联动已停用。"
             }
         }
     }
 
     private func present(_ panel: NSSavePanel, selection: @escaping (URL) -> Void) {
-        guard let workbench = NSApp.windows.first(where: { $0.identifier?.rawValue == "OrbitWorkbench" }) else { return }
-        panel.beginSheetModal(for: workbench) { result in
+        guard !busy, !showingPanel,
+              let workbench = NSApp.windows.first(where: { $0.identifier?.rawValue == "OrbitWorkbench" }) else { return }
+        showingPanel = true
+        panel.beginSheetModal(for: workbench) { [weak self] result in
+            guard let self else { return }
+            self.showingPanel = false
             if result == .OK, let url = panel.url { selection(url) }
+            self.refreshIfQueued()
         }
     }
 
-    private func temporaryArchive() -> URL {
-        FileManager.default.temporaryDirectory.appendingPathComponent("agy-pack-\(UUID().uuidString).zip")
+    private func refreshIfQueued() {
+        guard refreshQueued, !busy, !showingPanel else { return }
+        refreshQueued = false
+        refresh()
     }
 
     private func fail(_ error: Error) {
@@ -197,13 +223,15 @@ private final class PackStore: ObservableObject {
     }
 
     private func perform(_ args: [String], script: String = "pack.py", refreshLibrary: Bool = false,
-                         preferCommandOutput: Bool = false,
+                         preferCommandOutput: Bool = false, preserveMessage: Bool = false,
                          cleanup: (() -> Void)? = nil,
                          finish: @escaping (Data) throws -> Void) {
         guard !busy else { cleanup?(); return }
         busy = true
-        failed = false
-        message = ""
+        if !preserveMessage {
+            failed = false
+            message = ""
+        }
         let driver = self.driver
         DispatchQueue.global(qos: .userInitiated).async {
             let result = Result {
@@ -217,7 +245,10 @@ private final class PackStore: ObservableObject {
             DispatchQueue.main.async { [weak self] in
                 defer { cleanup?() }
                 guard let self else { return }
-                defer { self.busy = false }
+                defer {
+                    self.busy = false
+                    self.refreshIfQueued()
+                }
                 do {
                     let (output, library) = try result.get()
                     if let library {
@@ -292,7 +323,7 @@ struct WorkbenchView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("反重力工作台")
                         .font(.system(size: 28, weight: .semibold))
-                    Text(store.library.skin.map { "当前皮肤  ·  \($0)" } ?? "当前皮肤  ·  客户端默认")
+                    Text(store.library.skin.map { "本地皮肤  ·  \($0)" } ?? "本地皮肤  ·  默认外观")
                         .font(.subheadline).foregroundStyle(.secondary)
                 }
                 Spacer()
@@ -318,6 +349,9 @@ struct WorkbenchView: View {
         .frame(minWidth: 780, minHeight: 555)
         .onAppear { store.refresh() }
         .onReceive(NotificationCenter.default.publisher(for: .orbitAppearanceChanged)) { _ in store.refresh() }
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didBecomeKeyNotification)) { event in
+            if (event.object as? NSWindow)?.identifier?.rawValue == "OrbitWorkbench" { store.refresh() }
+        }
     }
 
     private var packsPane: some View {
@@ -326,8 +360,9 @@ struct WorkbenchView: View {
                 HStack {
                     Text("套装库").font(.headline)
                     Spacer()
-                    Button(action: store.refresh) { Image(systemName: "arrow.clockwise") }
-                        .buttonStyle(.borderless).help("刷新套装库")
+                    Button { store.refresh(preserveMessage: false) } label: { Image(systemName: "arrow.clockwise") }
+                        .buttonStyle(.borderless).help("刷新套装库").accessibilityLabel("刷新套装库")
+                        .disabled(store.busy)
                 }
                 ScrollView {
                     VStack(alignment: .leading, spacing: 6) {
@@ -370,12 +405,22 @@ struct WorkbenchView: View {
             VStack(alignment: .leading, spacing: 13) {
                 if let entry = store.entry {
                     HStack(alignment: .center) {
-                        Text(entry.name).font(.title2.weight(.semibold)).lineLimit(1)
+                        Text(entry.name).font(.title2.weight(.semibold)).lineLimit(2)
                         Spacer()
-                        Text("外观预览").font(.subheadline).foregroundStyle(.secondary)
+                        if store.pet?.animatedPoses == true {
+                            Picker("桌宠姿势", selection: $store.previewMood) {
+                                Text(Mood.idle.label).tag(Mood.idle)
+                                Text(Mood.thinking.label).tag(Mood.thinking)
+                                Text(Mood.done.label).tag(Mood.done)
+                                Text(Mood.error.label).tag(Mood.error)
+                            }
+                            .fixedSize()
+                        }
                     }
                     stage(entry)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    Text("壁纸与磨砂在安装工具箱补丁后的 Hub 聊天页生效。")
+                        .font(.callout).foregroundStyle(.secondary)
                     HStack(spacing: 9) {
                         Button(action: store.apply) {
                             Label(store.library.active == entry.id ? "重新应用" : "应用套装", systemImage: "checkmark")
@@ -413,8 +458,7 @@ struct WorkbenchView: View {
     private func stage(_ pack: PackEntry) -> some View {
         GeometryReader { box in
             ZStack(alignment: .bottomLeading) {
-                LinearGradient(colors: [Color(red: 0.26, green: 0.30, blue: 0.49),
-                                        Color(red: 0.50, green: 0.55, blue: 0.71)],
+                LinearGradient(colors: [pack.skin.accent, Color(nsColor: .windowBackgroundColor)],
                                startPoint: .topLeading, endPoint: .bottomTrailing)
                 if let wallpaper = store.wallpaper {
                     Image(nsImage: wallpaper)
@@ -422,24 +466,25 @@ struct WorkbenchView: View {
                         .frame(width: box.size.width, height: box.size.height).clipped()
                         .accessibilityHidden(true)
                 }
-                Color(red: 0.92, green: 0.94, blue: 1).opacity(Double(pack.skin.veil) / 155)
+                Color(nsColor: .windowBackgroundColor).opacity(Double(pack.skin.veil) / 100)
                 HStack(alignment: .bottom, spacing: 8) {
                     VStack(alignment: .leading, spacing: 7) {
                         Text(pack.skin.name).font(.headline)
-                        Text(store.petName).font(.subheadline)
+                        if let pet = store.pet { Text(pet.name).font(.subheadline) }
                         Text("遮罩 \(pack.skin.veil)%  ·  磨砂 \(pack.skin.blur) px")
                             .font(.caption).monospacedDigit()
                     }
-                    .foregroundStyle(Color(red: 0.12, green: 0.17, blue: 0.26))
+                    .foregroundStyle(.primary)
                     .padding(13)
                     .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+                    .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(pack.skin.accent.opacity(0.55)))
                     Spacer(minLength: 0)
                     if let pet = store.pet {
-                        Image(nsImage: pet)
+                        Image(nsImage: pet.image(for: store.previewMood))
                             .resizable().scaledToFit()
                             .frame(width: min(box.size.width * 0.43, 238), height: min(box.size.height * 0.73, 238))
                             .shadow(color: .black.opacity(0.22), radius: 11, x: 0, y: 9)
-                            .accessibilityLabel(store.petName)
+                            .accessibilityLabel("\(pet.name)，\(store.previewMood.label)")
                     }
                 }
                 .padding(18)
@@ -469,8 +514,9 @@ struct WorkbenchView: View {
             if activity.groups.isEmpty {
                 VStack(spacing: 9) {
                     Image(systemName: "waveform.path").font(.system(size: 29)).foregroundStyle(.secondary)
-                    Text("等待已启用联动的工作区").font(.headline)
-                    Text("在这些工作区开始会话后，状态会出现在这里。").foregroundStyle(.secondary)
+                    Text("还没有收到会话事件").font(.headline)
+                    Text("启用一个工作区后，在 Hub 内从该工作区开始会话。")
+                        .foregroundStyle(.secondary)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
@@ -481,8 +527,12 @@ struct WorkbenchView: View {
                                 Label(group.label, systemImage: "folder")
                                     .font(.headline)
                                 ForEach(group.sessions) { session in
-                                    TimelineView(.periodic(from: .now, by: 1)) { context in
-                                        activityRow(session, now: context.date)
+                                    if session.ended == nil {
+                                        TimelineView(.periodic(from: session.started, by: 1)) { context in
+                                            activityRow(session, now: context.date)
+                                        }
+                                    } else {
+                                        activityRow(session, now: session.updated)
                                     }
                                 }
                             }
@@ -498,7 +548,7 @@ struct WorkbenchView: View {
     }
 
     private func activityRow(_ session: ActivitySession, now: Date) -> some View {
-        let seconds = max(0, Int((session.mood == .thinking ? now : session.updated).timeIntervalSince(session.started)))
+        let seconds = session.duration(at: now)
         let duration = seconds < 60 ? "\(seconds) 秒" : "\(seconds / 60) 分 \(seconds % 60) 秒"
         return HStack(spacing: 12) {
             Circle().fill(Color(nsColor: session.mood.tint)).frame(width: 8, height: 8).accessibilityHidden(true)

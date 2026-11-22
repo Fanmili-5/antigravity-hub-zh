@@ -15,7 +15,7 @@ PNG_FILES = (
 )
 JPEG_FILES = ("packs/fjord/wallpaper.jpg", "docs/images/fjord-preview.jpg", "docs/images/toolkit-overview.jpg")
 FILES = (
-    ".gitignore", ".github/ISSUE_TEMPLATE/feedback.yml",
+    ".gitignore", ".github/ISSUE_TEMPLATE/feedback.yml", ".github/workflows/ci.yml",
     ".agents/skills/antigravity-hub-zh/SKILL.md",
     ".agents/skills/antigravity-hub-tools/SKILL.md",
     "LICENSE", "README.md", "CONTRIBUTING.md", "CHANGELOG.md",
@@ -28,7 +28,7 @@ FILES = (
     "pet/examples/gugugaga/README.md", "pet/examples/gugugaga/pet.json",
     "pet/examples/gugugaga-slate/README.md", "pet/examples/gugugaga-slate/pet.json",
     "tests/test_source.py", "tests/test_customizations.py", "tests/test_packs.py",
-    "tests/test_orbit_events.py", "tests/test_orbit_step_limit.py", "tests/test_skin.cjs",
+    "tests/test_orbit_events.py", "tests/test_orbit_step_limit.py", "tests/test_skin.cjs", "tests/ActivityTests.swift",
     "tools/fingerprint.py", "tools/local_config.py", "tools/orbit_events.py", "tools/package_release.py",
     *JPEG_FILES,
     *PNG_FILES,

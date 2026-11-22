@@ -91,9 +91,19 @@ def verify_payload(entries):
 
 
 def read_archive(path):
-    if path.stat().st_size > sum(LIMITS.values()) + 4096:
-        raise ValueError("套装 ZIP 超出大小限制。")
-    with ZipFile(path) as archive:
+    with os.fdopen(os.open(path, os.O_RDONLY | os.O_NONBLOCK), "rb") as file:
+        info = os.fstat(file.fileno())
+        if not stat.S_ISREG(info.st_mode):
+            raise ValueError("请选择普通的套装 ZIP 文件。")
+        if info.st_size > sum(LIMITS.values()) + 4096:
+            raise ValueError("套装 ZIP 超出大小限制。")
+        entries = read_members(file)
+    verify_payload(entries)
+    return entries
+
+
+def read_members(file):
+    with ZipFile(file) as archive:
         members = archive.infolist()
         names = {item.filename for item in members}
         if len(names) != len(members) or not REQUIRED <= names <= LIMITS.keys():
@@ -106,7 +116,6 @@ def read_archive(path):
                 raise ValueError(f"套装文件无效：{item.filename}")
             with archive.open(item) as stream:
                 entries[item.filename] = stream.read(LIMITS[item.filename] + 1)
-    verify_payload(entries)
     return entries
 
 
@@ -252,9 +261,11 @@ def current_payload(name):
 
 def export_pack(entries, path):
     verify_payload(entries)
-    path = path.resolve()
+    path = path.absolute()
     if path.suffix.lower() != ".zip":
         raise ValueError("导出文件请使用 .zip 后缀。")
+    if path.exists() or path.is_symlink():
+        raise FileExistsError(f"导出文件已存在，请选择新文件：{path}")
     with tempfile.TemporaryDirectory(dir=path.parent, prefix=".agy-export-") as temporary:
         directory = Path(temporary) / "assets"
         write_entries(directory, entries)
@@ -266,7 +277,10 @@ def export_pack(entries, path):
                 entry.create_system = 3
                 entry.external_attr = 0o100644 << 16
                 archive.writestr(entry, data, compress_type=ZIP_DEFLATED)
-        os.link(candidate, path)
+        try:
+            os.link(candidate, path)
+        except FileExistsError:
+            raise FileExistsError(f"导出文件已存在，请选择新文件：{path}") from None
 
 
 def preview_pack(entries, output):
@@ -284,7 +298,10 @@ def preview_pack(entries, output):
     replacements = {"__NAME__": html.escape(index["name"]), "__PET__": html.escape(metadata["name"]),
                     "__PICTURE__": picture, "__ATLAS__": atlas, "__TINT__": skin["tint"],
                     "__BLUR__": str(skin["blur"]), "__VEIL__": str(skin["veil"] / 100),
-                    "__LAYOUT__": metadata["layout"]}
+                    "__VEIL_PERCENT__": str(skin["veil"]),
+                    "__PANEL__": str(max(37, (78 * skin["veil"] + 50) // 100)),
+                    "__ART__": skin["art"], "__LAYOUT__": metadata["layout"],
+                    "__WALLPAPER__": "wallpaper" if picture else ""}
     template = (ROOT / "packs/preview.html").read_text(encoding="utf-8")
     output.parent.mkdir(parents=True, exist_ok=True)
     result = re.sub("|".join(replacements), lambda match: replacements[match[0]], template)
@@ -311,7 +328,8 @@ def library_status():
                 entries.append(describe(folder.name, files, folder / "pet", folder / "wallpaper.jpg"))
             except (OSError, ValueError):
                 continue
-    skin, sprite, linked = (state(path) for path in (theme.ACTIVE, pet.ACTIVE, SELECTION))
+    with appearance_lock():
+        skin, sprite, linked = (state(path) for path in (theme.ACTIVE, pet.ACTIVE, SELECTION))
     active = linked.get("id") if selection_matches(linked, skin, sprite) else None
     return {"packs": entries, "active": active, "skin": skin.get("name")}
 

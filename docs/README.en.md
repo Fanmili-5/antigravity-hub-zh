@@ -77,7 +77,7 @@ The script restores the original bundle and verifies Google's signature. The bac
 
 ## Appearance packs and desktop pet
 
-The native workbench and pet require Xcode Command Line Tools for the first build. Wallpaper and glass take effect after installing the Hub patch.
+The workbench and pet can run on their own. The first launch builds `dist/Orbit Pet.app` using Python 3.9+ and Xcode Command Line Tools. If the tools are missing, run `xcode-select --install`. Once the app starts, open the workbench from the sparkle icon in the menu bar. Wallpaper and glass take effect on the Hub chat screen after you install the patch.
 
 | Task | Run from the source directory |
 | --- | --- |
