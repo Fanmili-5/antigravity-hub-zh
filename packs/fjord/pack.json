@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "name": "峡湾 · 极地向导",
+  "skin": {
+    "name": "峡湾暮色",
+    "art": "dusk",
+    "tint": "#5E71BE",
+    "veil": 48,
+    "blur": 14
+  }
+}

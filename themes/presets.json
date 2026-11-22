@@ -1,0 +1,23 @@
+{
+  "jade": {
+    "name": "青瓷云海",
+    "art": "jade",
+    "tint": "#3A8F81",
+    "veil": 62,
+    "blur": 8
+  },
+  "dusk": {
+    "name": "暮蓝星环",
+    "art": "dusk",
+    "tint": "#5E71BE",
+    "veil": 65,
+    "blur": 7
+  },
+  "sand": {
+    "name": "纸灯余晖",
+    "art": "sand",
+    "tint": "#D38668",
+    "veil": 65,
+    "blur": 8
+  }
+}

@@ -1,0 +1,522 @@
+{
+  "web": {
+    "controls": {
+      "newConversation": {
+        "16:c77ecb20e87ceeb1e5998beaff23106653c882193d2eb3cb657e57eef53f57ca": "新建会话"
+      },
+      "settingsButton": {
+        "8:74a883a037bc227f91891ab654a753d3a99f31ab06ae5b5d2b6e594a692b41f8": "设置"
+      },
+      "automations": {
+        "11:ad1fb9ec0cb3c7a4747e4c161c83af164f3f49b2b88ed79f26c2af640a7af57e": "自动化"
+      },
+      "sidebarHeading": {
+        "8:04e2a9728af7584043c5d58ae29e7cd811883e8dab15fc6287675270669a3ada": "项目",
+        "13:1d432f58690c2b4a9737b0a97f04b70bb4f0d9950d5177619039afe139f3b31e": "会话"
+      },
+      "extensionsHeader": {
+        "10:fe3436af86b47d22f22d93da68119fcb749dbed0335b4dc99f254e02db236156": "扩展"
+      },
+      "addMcp": {
+        "7:96a9ef4c11013ea09a6d854fb700a7a45b25b516cddd0eec3d3703bf8e3791fb": "添加 MCP"
+      },
+      "settingsHeading": {
+        "8:74a883a037bc227f91891ab654a753d3a99f31ab06ae5b5d2b6e594a692b41f8": "设置",
+        "10:1377264ba3b0a7172621971b49ac3e82e33b64b14328d9275d02807e67ea8460": "工作区",
+        "8:04e2a9728af7584043c5d58ae29e7cd811883e8dab15fc6287675270669a3ada": "项目",
+        "14:5dcb33056123e15c8b6ec72861ea1a33176bdbd915a298c3150891104dda8616": "项目外"
+      },
+      "settingsNavigation": {
+        "7:c910d474dcd724bff83ddedeb06bf1eceaf9fb3af7c76bb282be057f36e6dffa": "常规",
+        "11:e7ad522ea327e5ba95534ef8355038ef7f7b86328c7cf9175886f60464c40d28": "应用程序",
+        "10:3907fa7f80722a6fc58cd8c1bd30abf7638095d6774f183b6e831b7093957d1b": "外观",
+        "9:46e978d0c19397c7d0318f6440950c15e046f5841a0feb03c35fdc68e1dfc68a": "快捷键",
+        "13:788011833a5a0f22db90c91e8eb7bd8e9f5cd423354ff5ef8c338e7895f44ba9": "通知",
+        "6:d17d2d78d76e6a6cd13048de225e107ac73de4aa5f8914e58a0cfaa9698c373e": "模型",
+        "14:2213674d80047f09de12e7a0498d56f677ce1abbaa52ed42bbd2038f576cdabf": "自定义",
+        "7:d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc": "浏览器",
+        "9:3fb7b39416f1d067268747fc214494d759d2609f863ace1a8a76705618d5c80b": "开发者",
+        "13:0629f48c230e746df015da3093943bdd5560de87133b31627975ff930bc845f9": "提供反馈",
+        "8:04e2a9728af7584043c5d58ae29e7cd811883e8dab15fc6287675270669a3ada": "项目",
+        "6:279b44d2ab4b40c0fc132f8f3051293544cca91de9c8aa14f2cd29adb132b0ee": "智能体",
+        "12:07437cd651bed86ed83d954361d8e85f2de81677e267224bd85ec2c83349bf96": "环境",
+        "7:f4ccae29e1bb0c20a124570a1b43f4347ea94bba9f84ffdfddd9c7445b126128": "运行中",
+        "13:1d432f58690c2b4a9737b0a97f04b70bb4f0d9950d5177619039afe139f3b31e": "会话"
+      },
+      "settingsSections": {
+        "7:c910d474dcd724bff83ddedeb06bf1eceaf9fb3af7c76bb282be057f36e6dffa": "常规",
+        "11:e7ad522ea327e5ba95534ef8355038ef7f7b86328c7cf9175886f60464c40d28": "应用程序",
+        "10:3907fa7f80722a6fc58cd8c1bd30abf7638095d6774f183b6e831b7093957d1b": "外观",
+        "9:46e978d0c19397c7d0318f6440950c15e046f5841a0feb03c35fdc68e1dfc68a": "快捷键",
+        "13:788011833a5a0f22db90c91e8eb7bd8e9f5cd423354ff5ef8c338e7895f44ba9": "通知",
+        "6:d17d2d78d76e6a6cd13048de225e107ac73de4aa5f8914e58a0cfaa9698c373e": "模型",
+        "7:d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc": "浏览器",
+        "16:f0e59d85dea552a2b0367a6d383b43c36392d391b04ac34f6fc7c52cbab2e5fc": "界面布局",
+        "18:ff0078c29d6f297d983a0c96af9c63e68fd03b1922daff98a0f897d561596943": "全局权限",
+        "9:d434e617211f4c8950aabe0a1d48da13e8c998b3811b5af33816d23cb50dca34": "输入框",
+        "10:5c6aea379fa2521aacad21f5ac0b3005a2b030c79effd550533c4155ca421164": "语音模式",
+        "13:d3368cbffe23c98da887d279a1b5c74b7618ba5c0488cbed30cf304f8f9398a1": "无障碍",
+        "5:efb52e7172b77731d996ff4f51cd7b3dcfd55fc6f07392994619418d58d170dd": "主题"
+      },
+      "layoutMode": {
+        "14:26d22c0b9910059599b8ef3ca7e0d04b59fdf39e3a381b518970c295c7ab5efd": "知识工作",
+        "20:b2bc073a22accb2f590ced74893863350338752032af5738f451e61a91c9ae4d": "软件开发"
+      },
+      "customizationHeading": {
+        "14:2213674d80047f09de12e7a0498d56f677ce1abbaa52ed42bbd2038f576cdabf": "自定义"
+      },
+      "customizationTabs": {
+        "14:2213674d80047f09de12e7a0498d56f677ce1abbaa52ed42bbd2038f576cdabf": "自定义"
+      },
+      "customizationsTabsLabels": {
+        "11:c608981d8d68fa4f7cc130ea31b777349cd235bcce1d9dfd35789630bdd67f18": "插件市场",
+        "9:f8b32f4e92bd84ce1fcd177bec17d43093de3ee8303bb40c1b9ea521ed6a70f6": "已安装"
+      },
+      "installedSections": {
+        "7:9514b7ff4860ead73491768e45cce0ce20e6e3473a7b272e496c43c875d80ac5": "插件",
+        "14:00e6f89be431ac89dcf53988351c51c0c1c831a957203b26da3524519441f8a7": "技能与规则",
+        "13:949db82d991f9a320f834df634b4df8716168e4528de479926dbe24ee7ecd3ea": "自定义智能体",
+        "11:aab669a72882ca009bc15371b03585a0ad10e9dba5ec955170f0e89a01d9114c": "MCP 服务器",
+        "10:6841468c98f0489e4df22d3b9da5f50ca816536f08ca013d5d73e913f52f1a05": "界面插件",
+        "11:ad1fb9ec0cb3c7a4747e4c161c83af164f3f49b2b88ed79f26c2af640a7af57e": "自动化",
+        "7:ff042b6ded4e4171bb9b674636818f3b4b198a5252ccaa6a27248cb0b8fc944e": "扩展包"
+      },
+      "marketplaceHeading": {
+        "12:9d0d280e558176c43fd56b0202e324257647a11a440df0358db105ee55a0b08c": "更多插件"
+      },
+      "addMcpDialog": {
+        "14:2fdba7aa01af420bf26d3de0ca90dd4a16838828a906b21b3b55226975a80f81": "添加 MCP 服务器"
+      },
+      "modelHeading": {
+        "5:5e2c614c23f02239bc03c6c04fcb681950f9e72bf8fdff6be79c79841cbb10c0": "模型",
+        "16:1aaa0800292194e0ff1631d47c3fc95df4128903df0ea7c92e4145af613d1e8e": "用于多模型择优的模型"
+      },
+      "modelEffort": {
+        "3:f793de205ead5ac302c4a1627829dea41f176b1068b993a32373fc869918374b": "简略",
+        "6:8e588cd187741f1cd76f5fab77b7208782a8c21d764ce7d7a4cf3ac4e0968873": "中等",
+        "4:c4ebc6d4a5832cd9415f906ad03661110c705a72381c8b8b145761d02e2dd23a": "深入",
+        "5:2e4aaf05df1cbfb30a89bd189df147c7e70f2f46a698a95336b344c0ecb79041": "深度",
+        "3:a1a5936d3b0f8a69fd62c91ed9990d3bd414c5e78c603e2837c65c9f46a93eb8": "最高"
+      },
+      "activeModelEffort": {
+        "3:f793de205ead5ac302c4a1627829dea41f176b1068b993a32373fc869918374b": "简略",
+        "6:8e588cd187741f1cd76f5fab77b7208782a8c21d764ce7d7a4cf3ac4e0968873": "中等",
+        "4:c4ebc6d4a5832cd9415f906ad03661110c705a72381c8b8b145761d02e2dd23a": "深入",
+        "5:2e4aaf05df1cbfb30a89bd189df147c7e70f2f46a698a95336b344c0ecb79041": "深度",
+        "3:a1a5936d3b0f8a69fd62c91ed9990d3bd414c5e78c603e2837c65c9f46a93eb8": "最高"
+      },
+      "emptyModels": {
+        "19:a5a9895b0241125f15e8c45740f220dc69014c8d046ea815d61dd3700c1e627b": "没有可用模型"
+      },
+      "composerHint": {
+        "15:da0e101a67e7aeed557eeefe4d052875af747ec9d6c4110755cf58f7bc79d984": "输入任何问题...",
+        "26:b4322e5cd6db2b931955c0771039d31762d9369282b272136d22d0690fd28120": "输入你的问题，输入 @ 提及",
+        "41:3ea9f6a0c2f684b217ead2a5581bf5a00130baa5755a3fd255efe066ce47d41b": "输入你的问题，输入 @ 提及，输入 / 执行操作",
+        "30:65ef4bc09dbca5260446c29a35db4b544c0b7c6e709fef0ff7b6eea77d64c589": "给子智能体发消息，输入 @ 提及",
+        "45:faf471ee90a91d42d75f245cb54581c651a9569056ac6309f9f4e87879cfa8e6": "给子智能体发消息，输入 @ 提及，输入 / 执行操作"
+      },
+      "closeSettings": {
+        "5:7d9eb7acb13e24625c404401d8e88b2350e32162455885f18276cf802f7701ed": "关闭"
+      },
+      "customizeNavigation": {
+        "14:2213674d80047f09de12e7a0498d56f677ce1abbaa52ed42bbd2038f576cdabf": "自定义"
+      },
+      "customizeViews": {
+        "20:222de60a20a6b270aa1d49d484519a589a67809365e9b315858b44602410a6dc": "自定义视图"
+      },
+      "closeMcp": {
+        "5:7d9eb7acb13e24625c404401d8e88b2350e32162455885f18276cf802f7701ed": "关闭"
+      },
+      "layoutName": {
+        "16:f0e59d85dea552a2b0367a6d383b43c36392d391b04ac34f6fc7c52cbab2e5fc": "界面布局"
+      },
+      "layoutChoice": {
+        "14:26d22c0b9910059599b8ef3ca7e0d04b59fdf39e3a381b518970c295c7ab5efd": "知识工作",
+        "20:b2bc073a22accb2f590ced74893863350338752032af5738f451e61a91c9ae4d": "软件开发"
+      },
+      "customizeSearch": {
+        "24:61a2860ff1a4b7dcb5ddc5a5065c533a01496cb3acf28ba8e86d8fb24f8b668d": "搜索自定义项…"
+      },
+      "newConversationA11y": {
+        "16:c77ecb20e87ceeb1e5998beaff23106653c882193d2eb3cb657e57eef53f57ca": "新建会话"
+      },
+      "sidebarToggle": {
+        "14:1d4c17db52f714ab60482303089684ad946621f40958d2f8d1154e1515161032": "切换侧边栏"
+      },
+      "auxSidebar": {
+        "17:a18e5eb2b60cc7215e60067db8edc1e76ef80e928164067d36acbc0bc9506f92": "切换侧面板"
+      },
+      "overview": {
+        "21:a519d8252be71edc5b9007529dc14ee906e510974e8f3d2ee48c5724aaa50bf6": "切换概览面板"
+      },
+      "archiveConversation": {
+        "20:8ade79f38f02db309a8ccb33209f3d45ab9b49c70f17730eb46eb6a19279740c": "归档会话"
+      },
+      "addContext": {
+        "11:0f01d14cacf01cb80c8df5a1c4082cfb7b859f544539ce7a6935440221cf1684": "添加上下文"
+      },
+      "sendMessage": {
+        "12:93a26b1eaff99b3a84dd80366660991d15703a96514497afd997c12c43000ed7": "发送消息"
+      },
+      "searchConversations": {
+        "20:4a322e26fde59fb941c2507dbeb8ced9a9d4a44161bcde7ea48e982b6d3581cc": "搜索会话"
+      },
+      "openSettings": {
+        "8:74a883a037bc227f91891ab654a753d3a99f31ab06ae5b5d2b6e594a692b41f8": "设置",
+        "13:3f940108cb1ecd9c0090da0b51b45f9fe673f00b22c7ffe3d013319b97456674": "打开设置"
+      },
+      "addProject": {
+        "11:44b7ce21b9f2b32c0ef70ca93ecfa158feefada1d403635a950e30cd5ed3fa38": "添加项目",
+        "14:4d3c29d3258c7bbfc1e30bb0270c64a8160fc94202b98b561be61258b9111114": "创建项目",
+        "18:e6aa22b9d2b6bd113754e4d0c37e19a0a7880c36c965b06578d039a0ed606f84": "新建项目",
+        "13:144a41cdae6d286a2f8fce92d527ad6a7740b5a68c7ec52abb4e2f94874594ee": "添加工作区"
+      },
+      "addMcpButton": {
+        "14:2fdba7aa01af420bf26d3de0ca90dd4a16838828a906b21b3b55226975a80f81": "添加 MCP 服务器"
+      },
+      "extensionVisibility": {
+        "23:b022d8878e896c0b7ad18a62ed1a441e2ab41e0e08b0f2652dbc1a64be755468": "显示或隐藏扩展"
+      },
+      "sortConversations": {
+        "29:9eb82bcf63158d6161d6ccdb5dc7770ca81108105c7bfc823931533cfcfd40a0": "排序和筛选会话"
+      },
+      "mcpSearchPlaceholder": {
+        "26:6f65bf600477fe2d9e171b41fdf44b721cc583af5c2e3ac353bf2095b0c9a08c": "按名称搜索 MCP 服务器"
+      },
+      "mcpSearchA11y": {
+        "26:6f65bf600477fe2d9e171b41fdf44b721cc583af5c2e3ac353bf2095b0c9a08c": "按名称搜索 MCP 服务器"
+      },
+      "renameConversation": {
+        "17:2d4ea5b7308180575b8cfcb80a670d40ad984bdb91a0a1f2306e5f0c35f0b52b": "会话名称"
+      },
+      "newConversationTooltip": {
+        "16:c77ecb20e87ceeb1e5998beaff23106653c882193d2eb3cb657e57eef53f57ca": "新建会话"
+      },
+      "settingsTooltip": {
+        "8:74a883a037bc227f91891ab654a753d3a99f31ab06ae5b5d2b6e594a692b41f8": "设置",
+        "13:3f940108cb1ecd9c0090da0b51b45f9fe673f00b22c7ffe3d013319b97456674": "打开设置"
+      }
+    },
+    "settingsTitles": {
+      "7:c910d474dcd724bff83ddedeb06bf1eceaf9fb3af7c76bb282be057f36e6dffa": "常规",
+      "11:e7ad522ea327e5ba95534ef8355038ef7f7b86328c7cf9175886f60464c40d28": "应用程序",
+      "10:3907fa7f80722a6fc58cd8c1bd30abf7638095d6774f183b6e831b7093957d1b": "外观",
+      "9:46e978d0c19397c7d0318f6440950c15e046f5841a0feb03c35fdc68e1dfc68a": "快捷键",
+      "13:788011833a5a0f22db90c91e8eb7bd8e9f5cd423354ff5ef8c338e7895f44ba9": "通知",
+      "6:d17d2d78d76e6a6cd13048de225e107ac73de4aa5f8914e58a0cfaa9698c373e": "模型",
+      "14:7603a629237c57de5d6ef860768381209985016cd4fb1701c39dd4db5214593d": "模型与用量",
+      "7:d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc": "浏览器",
+      "16:afd9ad5ca21de7c02b2e72500cdb978ff22df17dbc55a0e22e24338324039396": "工具权限",
+      "29:baf98f2dfe737d39f465f12f35da36bfc8b2b671d6307508b87ca79f84911f30": "浏览器操作权限",
+      "16:d34508eaa65a6f53b0b308cd58ea6c87cc35a9009d93e6b3e9cad73ea33566a0": "文件权限",
+      "17:71bd5d86640b95267df8fceed5eaf1d3248691b3f32aa2c02480b8c64f317644": "终端命令",
+      "19:9acc3e29cc9279ef9d5a3b033a3184ee0c8795958f81c5b1fe884fd59fe611d4": "网络权限",
+      "24:694838b51ab1a91a263f120f21359fef4910673d7401ad862538a5f2181eb733": "沙箱外命令",
+      "9:ecd806d3c25e667a54b4cfe16c48d64bb8000ca417acf85913bd502546482a4b": "MCP 工具"
+    },
+    "settings": {
+      "5:7d9eb7acb13e24625c404401d8e88b2350e32162455885f18276cf802f7701ed": "关闭",
+      "4:76900f1bfd16c8d4dd3d25e6f46638d7165aee23883ccea6bfe071c514421769": "返回",
+      "7:c910d474dcd724bff83ddedeb06bf1eceaf9fb3af7c76bb282be057f36e6dffa": "常规",
+      "11:e7ad522ea327e5ba95534ef8355038ef7f7b86328c7cf9175886f60464c40d28": "应用程序",
+      "10:3907fa7f80722a6fc58cd8c1bd30abf7638095d6774f183b6e831b7093957d1b": "外观",
+      "9:46e978d0c19397c7d0318f6440950c15e046f5841a0feb03c35fdc68e1dfc68a": "快捷键",
+      "13:788011833a5a0f22db90c91e8eb7bd8e9f5cd423354ff5ef8c338e7895f44ba9": "通知",
+      "6:d17d2d78d76e6a6cd13048de225e107ac73de4aa5f8914e58a0cfaa9698c373e": "模型",
+      "14:7603a629237c57de5d6ef860768381209985016cd4fb1701c39dd4db5214593d": "模型与用量",
+      "7:d31de1a5c5c8ba2a210a167cf0d0dc2425c57ea7525f4b73a4b7ab934af79dfc": "浏览器",
+      "16:afd9ad5ca21de7c02b2e72500cdb978ff22df17dbc55a0e22e24338324039396": "工具权限",
+      "29:baf98f2dfe737d39f465f12f35da36bfc8b2b671d6307508b87ca79f84911f30": "浏览器操作权限",
+      "9:ecd806d3c25e667a54b4cfe16c48d64bb8000ca417acf85913bd502546482a4b": "MCP 工具",
+      "68:a8bb2d4257b6a47db505046bb38d29c38f15caad38fa2775208fd8558b8e3cc7": "配置智能体的执行方式、排队消息的发送时机及权限。",
+      "16:f0e59d85dea552a2b0367a6d383b43c36392d391b04ac34f6fc7c52cbab2e5fc": "界面布局",
+      "14:26d22c0b9910059599b8ef3ca7e0d04b59fdf39e3a381b518970c295c7ab5efd": "知识工作",
+      "63:e8fd040e00ffe20a23a214e6d37b2358cb45085d5cf915398db6eba817c2391c": "适合研究、写作和日常任务的简洁界面。",
+      "20:b2bc073a22accb2f590ced74893863350338752032af5738f451e61a91c9ae4d": "软件开发",
+      "64:263dfc0af83b7698b7a97ae9c30b200e842c8455e189e08f27b755398ec5d758": "提供编程、开发工具和智能体管理的完整界面。",
+      "18:ff0078c29d6f297d983a0c96af9c63e68fd03b1922daff98a0f897d561596943": "全局权限",
+      "57:340eb663fa24842bd338a61b28fdf49b3c7cfc21cd53d9d4651b4db98e8cde3f": "为各类资源设置全局允许和拒绝规则。",
+      "66:e42f0895d9b3f8dff5153c0ac7c8ee8695cd74854b611601e9f11b88b3916e7c": "设置智能体在本地和远程会话中可以执行哪些操作。",
+      "10:1445799c033a2d17e2bad5d8610879e71ff0d73a8a3c2b932b43ad0449dac3a1": "了解详情",
+      "17:44269ea744639d6868e34c6f6b5818e44f6dbbbeb9a48a0569313695acde8374": "权限预设",
+      "40:5736e648214ad72f430ca89f5fc55bf0731bf9799b68027bbf402516c958f4d0": "控制智能体可以执行哪些操作。",
+      "16:a7b0060623380e53c968760e6c2de35661146b59eb3245ef3779e63cceddeded": "工具权限",
+      "53:9b5549f7cfa25ff02ef96211de54ab653d64f4bbbf06884c3f990b22cd7eef73": "修改文件、终端和 MCP 工具的权限。",
+      "47:8829b3ac6b144654856ba4e80dd74bc00e0ae7d06198de4e7cc83d6800269ec7": "修改文件和终端工具的权限。",
+      "20:0815d664aa819b0738624fd31a83e2674e69c3497ebc3ce4c925656e56679f39": "网络访问规则",
+      "46:19284895f7abecf9dc4df86e746b354907325409737ecc9d07a198dfb8be8ebe": "设置允许或禁止读取的 URL。",
+      "4:ed077f3d8125d60dca1979c7133601bd187d47c73ed9975028f677e49e709942": "打开",
+      "3:9fd728c66c9a256b121472dabf32a34317aed01d8427d70ec830289cf23a7cc8": "添加",
+      "5:e213c161d5cefa520c8dd4155c9569076d9a40406111465136a6f1b207045761": "允许",
+      "3:b8c209cdead61a095ec097b7a13c4fc9264c04b3e3bd0fca42ec8dbaeebeeafe": "询问",
+      "4:05a2d7332eb9d8bf164487c743a2e93c21b16bb2061a93e3ee2ceb508eadb753": "禁止",
+      "14:f691e8e4d6b297bb15cb0bd41f2a2c9387f26f4de96e6ddd751659d385f56d28": "请求审核",
+      "7:21b111cbfe6e8fca2d181c43f53ad548b22e38aca955b9824706a504b0a07a2d": "默认",
+      "4:0286249762f7c94349cdc0ba3bb2255baf9a80036e2193ead1d77696f888582f": "自动",
+      "5:d96a41b9d54581ab1ab1b39d89c4ef0938c7712e2a7a41854124f379812da241": "极速",
+      "17:2befb23f7053dc267d2c9442c708f1985979c39d01be8ab31089a89a8b5b83cf": "文件访问规则",
+      "61:345054ac06eb46789dcd6d691faacc1f42df332918113bd57618022108d92313": "设置允许或禁止读写的文件路径。",
+      "17:142fa9db5f3c9aff0082b1cf6fe7c907a7d1ead2097da8440f065e13c626972d": "终端命令",
+      "36:ed1df828338f4d4e2c0fd8570462a676d66b413249de29b798614184ff44affe": "设置允许执行的终端命令。",
+      "9:1a32c98e7fd8c153cde47dae9223603cd5ea2199d2166503a33026d72aa56caa": "MCP 工具",
+      "52:7b3679328fd052d37373eea2c8855eecac477f86723277a733a1f9775e349ff6": "通过模型上下文协议配置外部工具。",
+      "9:d434e617211f4c8950aabe0a1d48da13e8c998b3811b5af33816d23cb50dca34": "输入框",
+      "15:f8e64a37950a97d04e40ef2a8e8256f2ec667ad78869f33a5fb810d781d8856f": "排队消息",
+      "43:35f17fd0208023ff35d66214cfff1ce832e1095bf11f6673443a40b88123f4cf": "设置后续消息的发送时机。",
+      "35:1d0e54c47747e3192f8646cdfefde59e4f538436bd1d648be536ec4ec4c1cb62": "排队，等当前轮次结束后发送。",
+      "41:80b1ef773a411b844d4c64b413771bdbf4b9e4a1f60d45d633ff57519ba2c7ca": "中断智能体并立即发送。",
+      "18:e9bef0b0f3c25e6eaf3a754817a8b4f62e1c8473cb2be3e190975926dbf72d6f": "快捷键",
+      "12:93a26b1eaff99b3a84dd80366660991d15703a96514497afd997c12c43000ed7": "发送消息",
+      "54:07b6641e599000ef2073c005f4f5cf0cbedc6bacee346f193ba9e92f913ec668": "设置在聊天输入框中发送消息的快捷键。",
+      "48:11c3beefc7432c39e89c2ffd4fa4bd87636b6fe932604b576fa3e198ce7bc564": "按 Enter 发送，按 Shift+Enter 换行。",
+      "46:590514cf2fc8b187f09b688e237cc7b1b7a2a9cc109d5401cf1ebabc856d04b0": "按 Cmd+Enter 发送，按 Enter 换行。",
+      "47:254a5f4f76406996140ad0187da19641e41ff2f719347296762cd46fe735b15d": "按 Ctrl+Enter 发送，按 Enter 换行。",
+      "10:5c6aea379fa2521aacad21f5ac0b3005a2b030c79effd550533c4155ca421164": "语音模式",
+      "5:87bf2bc08589f0bd4a078db145c34ad5e14b8fda53c3ae65b78601294913df95": "语音",
+      "53:25d18479342c58b5a0c099849879c39b7fd5bb8298d9827c27ec88a7bb1ac056": "语音模式使用的声音，由 Gemini Live 提供。",
+      "7:4895f73177ab5d67c30c183a49d2477e014a2ef69b65150762d17e877f4f5b95": "未设置",
+      "6:c0bf75bd78bf9572596720d596bd5a20a5b9145cde0fe50dec1e783cb184d69b": "更改",
+      "7:a6b4705c688314f0a6e0de5886c082aab286c8fc763490d724218e7f5f53c54e": "更改…",
+      "10:186352a881d0550e2da1f74e5c317770702bc2a0f9c3da69a10e27c14a217bac": "麦克风",
+      "42:164a912d7b0f063e0feb5d5fdf142e736649bb33f7be1285dcc52e10b37c7f59": "用于语音模式和听写的输入设备。",
+      "14:b0459211f9f76871059135050a2afd9a01e7e41dc32ea58006c51483b9ceab6d": "系统默认",
+      "6:b10fb966d72063f534774c7c6b404f4decca76ac283093ae65fef78d07c1b75e": "音量",
+      "32:a789b14a97960f15476ee44b5ccc72a3f5378829ccd9813793efa6abd5c654c5": "调整 Antigravity 的语音音量。",
+      "17:22d4f6088b718aa471d4b671e7497315ff13df122c585460169d106c713a20c2": "高级设置",
+      "32:8980b28a18753f640d0bf38a6ac3997ca9fe7bf5fbfb61d48579a83ebdb3f5fa": "管理 Antigravity 应用程序设置。",
+      "13:1534dbc662153ba70db0b79a4a0150d20da6040718c35928ac307cd8f2f6e42f": "防止休眠",
+      "60:2a958b941fb6ef90fcacfdb17af90b652cf2032c45a7fa72c551675c4db1ad5c": "应用运行时防止电脑进入休眠。",
+      "16:fed7de0835e017e6ec868d20e36a51658b251ef99881ebdb62aeb20edd4dc73f": "保留菜单栏图标",
+      "100:ca13b23e30640fa7d8c28df60fbf8f9bf0107dbade825ef49cc07fafdfdc6a4e": "关闭所有窗口后，应用仍在后台运行，可从菜单栏打开。",
+      "14:e3bb59df64cc812616f7f9c74886f0c2c4bdf787557ea9b6bb00e9261be7094e": "远程控制",
+      "21:8bd0172e8379e6f8f2a6074ac51c4651d29ec879afb3d707b5cc423ab737c465": "启用远程控制",
+      "43:e2e29e8ae7709c1101408a762cfc75ab5734f4a0a172f8a9fdd6f078de97525c": "从另一台设备与本机智能体协作。",
+      "53:7244ad0d736bf477456c84cf4d1c859d69daa339820f4873a0a0e6f1d68f6b81": "通过配套网站管理你的会话。",
+      "21:07a063cab7ec227c3d00f553f0c4872488d96554ee73680586acb86592a93bab": "通知设置",
+      "81:83766c2d4390a3708a184870c963d0bd14ae59bd7f930a52acd42569ec891561": "如需修改通知设置，请打开操作系统的系统设置。",
+      "23:75bdba5e02927f3b647d5c990582ff09d8715f9adbdd514d36e612766360054b": "打开系统设置",
+      "7:dd167905de0defcaf72de673ee44c07431770d129ccffab286bd2edfdaf62396": "版本",
+      "11:80a7db3b236f581269594eb3b04938db79c003f03104cd04fa57ee1f69d8b8e1": "应用版本",
+      "12:f3c657add7a605e92e9e6e75616bb527ea963333164b99db129b935e7c78057f": "复制版本",
+      "27:32f35df430dc3d8637a5e0db56bece9b98601376fb8b0bd0020c6c04e4672135": "自动检查更新",
+      "144:c58697a6ad2abfeaec9f192df4828950f227e2ac701232dff1995f821c73069d": "有可用更新时自动提示重启应用。关闭后，可从应用菜单手动检查更新。",
+      "59:f447688aae0ac34d2339f48ac31f064c060963409973259f4517bc86c6943a8b": "设置智能体界面的主题和显示偏好。",
+      "4:460b3a7da007b7af9d35bca54181dc91382263b2bf133ca214871ca1fed1fc1c": "聊天",
+      "18:0b26d4f6275b1ef488f9ac7a2108243a71ae2ce10ce561b98a589a0785661ca8": "会话步骤",
+      "54:09d75ece059f55589efe9f504416d13464fc2512e04fc27383090d9e0cca347f": "选择会话中显示多少步骤细节。",
+      "7:2cd57109145ab1cb603c7417e2c382756f332d0fc0f9a43b4d461f7d55f5a09f": "详细",
+      "5:efb52e7172b77731d996ff4f51cd7b3dcfd55fc6f07392994619418d58d170dd": "主题",
+      "6:6725e7bbcd28f3a8a586fa34bf191fd72dde8b61756932cd3237c17a6f196f1a": "跟随系统",
+      "5:dbcd5e7bb7a0f538810de44c3efbd813037ee3fa358747bb71fa58e157af45f7": "浅色",
+      "4:60acc53f13a5d1bf115878c4a785e9a43e8286c4139a8402a6ac7d23966f9153": "深色",
+      "8:08795ba031bcd121e4e1ce47c1c2828a796ffbf6bb4e93daeee3937017bc7a04": "对比度",
+      "6:30a04fdcb6bb10b03f55db14e88d7c1f5bcc9129d511e9b6b7dadd49bcb1a755": "高对比度",
+      "4:64d0b3adcd2dbe33500fe9b96d2bc048601b19f4dc9db0d30f8648e156b583ad": "字体",
+      "9:4dd6ff92e0d9d761b43f497e2b9b1fc3b6251a9f631186cacac737e5d8182c4d": "字号",
+      "11:ceab50a6f7f453f7e142d161f1dfbf5a8211913882c38a08950e433ee3462919": "浅色主题",
+      "10:6f2a09157622c3346b9210a29b0f612c6b7e32f197cb4af1e8adecfc61c63dd9": "深色主题",
+      "6:7252e7ce008587e1180459d95c2536df954971d6c51e6ac753518a6fe15da563": "预设",
+      "13:092645292b0d81a13742bdd73c28339460e170870edaee69b0e5e9d6cbf51b94": "默认浅色",
+      "12:bcc7eea036a03f613afbdc3a6395801d8fe1aeec9d8ca1ddd0fed36c959fc9ae": "默认深色",
+      "10:ea2b8a878841df5955c78edc6cae47446483b86e3f5ccb04e1a8d940cf7e59fd": "背景色",
+      "10:ad4e241834eccd5c8763f0fbb554a1591ebf7cdd78d37e5e52bb913ed3341f5c": "前景色",
+      "6:a5c6fb18c9af89b22a791ba484c9cbc622ffa2af4267d0067883cf6a78d685ac": "强调色",
+      "23:99d679f391b50ce2a23ab65b998d89deb83277913b56598c6ec46d7218db2e34": "背景颜色选择器",
+      "23:633dda19171c31229122125f6db941b969168968a08e73dcfcd4718461fe742a": "前景颜色选择器",
+      "19:4d95fe82a6689d33f71c50f4d429c7d76107f04aa61869ff4cf727816f35a272": "强调颜色选择器",
+      "12:c12200ebafe90180755b1fc138b640d94ae3c6b515d971afd87d559c72b43f5a": "代码预览",
+      "11:ea586c8578d5dcb87ea07c94dff940fa5e4982966a084e2b2de4fac1039052fb": "聊天布局",
+      "18:758abedd52ba80f1436288f52e6e0ad0a3e94e5f0d6d986a1f99d4d5b18bb304": "会话宽度",
+      "54:3ff8d026c447606626688969d21fd72e8558059645c107942e29d6e2e5c62141": "设置会话面板的最大宽度。",
+      "6:ba227109ba7edbb49ff204fc37f744ef3e27130d3352cf09ce5527e0d7e62874": "窄",
+      "4:147170e793c6e58f2f7c858cb567f1aa926232793d664c034a4260f9d0e19875": "宽",
+      "4:033955d469b620d6612cb25b80a8d014acb633e4e0b14eb9e7618675f94e4a06": "填满",
+      "13:d3368cbffe23c98da887d279a1b5c74b7618ba5c0488cbed30cf304f8f9398a1": "无障碍",
+      "18:c60b7a602ab034c97f5fdffb02842de86efc80966df7f371fcb6a090fb913b62": "屏幕阅读器模式",
+      "62:68cc7965196570acbbd8fa9f8af639a7c1a8898025c2ef8f47a3e50cd97224de": "优化界面和终端输出，方便屏幕阅读器读取。",
+      "37:d8b7262f29b4c7f8c87bded275cacf8914e96e784cebac67d2945c6c6fd95bc4": "管理通知偏好。",
+      "30:2e57ca8af719b3831c11287922710ac0a1bb1be2e84882e7129c26ab95214a22": "启用智能体通知",
+      "75:9fe200387a487b3b16987a2ff4249b21ea1399783dac5e83ccc68319a0d5af47": "需要你操作或智能体完成任务时，显示系统通知。",
+      "5:46124e023603420f8670526e3eb9a603935e8916cb8e0428ea84bbe42d85d297": "声音",
+      "23:80ceb221d91c28f1ac086df229d01c476a0b83ff595eaadbf6aee7c0c1462f02": "启用智能体提示音",
+      "62:f1f07c0378cac20a78f5dc4fcc71c730c5e67bd65794ebfd19da13e49aed0502": "需要你操作或智能体完成任务时，播放提示音。",
+      "31:ac81c8f4334a9da00a5999cda563b0ab8459c77a35d9e25a203234550ba5ea9e": "调整智能体提示音的音量。",
+      "36:7fe35b2575b794eb91b341c202c09a724ba33cdb1268c4158f64fcbffc6f5382": "管理模型配额和 AI 积分。",
+      "30:8456bbd83e95575a275ce61d56084b132966235ad9c6d3c353b6152d060cf489": "刷新配额和积分数据",
+      "4:fa8ed0bdabdd6bcb1c0746f1d3e15212f7f3439d74339fbaaf16c60c0a80fb8e": "订阅方案",
+      "9:bdaeec33ca6d1e3923048b7202e6c4b60548dbe41c13674355fd70499aa03980": "你的订阅方案",
+      "10:33fbb1ec507d9e043205dccbb6bef2901c7c66b26356069ba99bc2ca39e22349": "你的订阅方案：",
+      "72:cf86587aae908b05a222d2861e07b99bafa0081806b94bf7d1c3933832741b2f": "升级到 Google AI Ultra 方案可获得更高的使用限额。",
+      "7:7ec0261b8e8aa3e0b1affde5f18ca1930ae73d81a5303d667aae9ffd2803cbc7": "升级",
+      "13:c45489ef00b95281cd3536e854619abaa329a031654f450a88a7d15aa2d60a42": "模型积分",
+      "25:e88db5b45d972c05f43493a2644815e6501c1f4a22b49f5fad0590b6ad9ee90a": "允许超额使用 AI 积分",
+      "187:47e378a7c73f7093afe5c256b60cb5154b3249412f8fd2fe085edd8b93dd3f2b": "开启后，模型配额用尽时，Antigravity 会使用你的 AI 积分继续处理模型请求。系统始终优先使用模型配额。",
+      "13:e3bdbd1d3e19a6fc37a4699b71a5f49c6f021c1ff1d58cab9fcb81e5cbf926aa": "Gemini 模型",
+      "21:93054b61f7ce1b8d21b295a4a6ddca44c4ac284616a40cd1c72f73287985d1c8": "Claude 与 GPT 模型",
+      "22:8fe6b67ce2c9e9511d7355d0cbfae8fdba14593d7e4df8999f122a339859ac4c": "本周剩余配额",
+      "25:12c8420e0cfddef33c1e6aa9293827687cda95ff954be9e53dc59ad7fe1ab991": "五小时剩余配额",
+      "75:2915d86617b853b6654c32bfd4d58b2c5a1ad6232fcdd531a1ddfe3b428c2725": "设置内置浏览器、链接打开方式及浏览器子智能体的偏好。",
+      "16:0aa00e13ecf2d5f83c1fc5353a4a4cac40a60e7591f63984e8dd7b69423fff18": "内置浏览器",
+      "13:17e6f6ae9657a405998b5b977980fff579045b85229a89a8063a49d49645a2b4": "链接打开方式",
+      "48:7797d1a192023939bc46f648bf22a944cd3c58026d8e4f07ec64573224a94823": "选择点击链接时默认使用的浏览器。",
+      "16:4a83b9eae083d1f30fbfb7674ea32609a19f74437088b4c4de10de784103b8a6": "外部浏览器",
+      "17:cac0ba08a047d74c96c9e450916c15fdf3033336ca7a0a509832d778f43b190e": "下载位置",
+      "64:d381657d85cc3211be8fe56e4e134bc93714427f469703f4cae6e3c500bc6b6f": "内置浏览器下载文件的保存文件夹。",
+      "16:13cc711d544e8c843c0f840534e523426ddeff1fd188ba7fbca616d3617999fe": "浏览记录",
+      "74:9ccde41bd3cff2484e20e8bdcfacc40f4a02a5d5ef160008fc67eee9485a5cb4": "清除内置浏览器的访问记录和自动补全建议。",
+      "5:83b12c2216efb4fdc924e1deb5182e905e4926ed0c1c324d467107f46d5a26a9": "清除",
+      "16:c3ef135cc34ff302d4a4438e2de99dd1e0ef1c72d979e5f53cbdfafde8600571": "浏览器子智能体",
+      "23:31ec2f29869edd6063e96ef140b5162a0847d3bf38a312373775fd9d1eda4d8b": "浏览器操作规则",
+      "134:3760e332b25adbe6b05bd154d58b20087822769bfb061d0932e2c7610dd2372b": "设置浏览器子智能体可以访问或禁止访问的 URL。子智能体在内置浏览器中运行，无需另外安装浏览器。",
+      "4:464c4ffd019e1e9691dcf0537c797353ef2b1c1d4833d3d463e5b74ae4547344": "编辑",
+      "12:e3ab64cd5f883700efc16f1227addd83ea691937d7934b41a02b4c3cc148fe30": "在指定网址执行操作",
+      "59:0c7341fbceba1a6cead98f5c1de33a75db5cc9dd4584ed22f659c3e02bbc1666": "允许或禁止智能体通过浏览器在指定 URL 执行操作。",
+      "14:79db2a0a687ee365d9aff2ae688a2a74fd96cfd0c9a6ca94aaa5302707fc88c6": "下载文件",
+      "60:bffc03d7752a2ffa4f8f4925d71afa3d5f816428bec4b3b9d2bd1532f8adf7d7": "允许或禁止智能体通过浏览器从指定网站下载文件。",
+      "52:e27913f26e3f0b69b7d270ba6dd6e4b65cf110c97c4cb2cf271ef98fd3b7cfe8": "用于快速导航和操作的键盘快捷键。",
+      "16:1ed2647cd6991770e65343bee2c9ff5e9c11eaeac43ea3e85cea9592510774d2": "搜索快捷键",
+      "19:ae6ebe2f27d169ab9834e5c4755c777830d89cda3fcee49e5455bd38c1f17518": "搜索快捷键…",
+      "10:3db65f8c2a7d1861b4bca37da3adec5aa7905931eb6faddbc595a35f75e6ca40": "导航",
+      "12:ccca1817575365871461752f3229dd59ede742ae69e350e20fd00a6ce3d149e3": "会话",
+      "24:51d8caf1646691c4a50c8f4589cfeba6e60a1452fc7ca0821e811fac6ae09cce": "打开会话选择器",
+      "16:9c8a2603307d306951e0d80a414cf1f16c0ac54511cde3c05b909f8d929aad6a": "打开文件搜索",
+      "20:58109680a1e144f692909eadf00b04afe39385b5f52ad5f48cacd8f16455218e": "打开命令面板",
+      "16:c77ecb20e87ceeb1e5998beaff23106653c882193d2eb3cb657e57eef53f57ca": "新建会话",
+      "9:f271892dc1c3f0b1a7895b7b20cf63b4abfc616f37c2d208b4b2e068d0f119cb": "关闭标签页",
+      "7:b8d99df1066e656219062abd3b949249d34060517eb78640da3f1e6a807c273a": "后退",
+      "10:ef565bcda2869546dc5c79dc9ca506a7688197ca2934f570ca67a80471c98f7a": "前进",
+      "11:ad1fb9ec0cb3c7a4747e4c161c83af164f3f49b2b88ed79f26c2af640a7af57e": "自动化",
+      "7:b2f8fd639208870b67e12dcab7e8ca9b82426c2b01e62dfbcfe20d85134b38e5": "新建标签页",
+      "17:c5a521a215c8cc5dfd552cebfdda9eda732cfcdc13387879b43bd0b3b3f5bd37": "重新打开已关闭的标签页",
+      "28:fbe105e94f2a6a0664280905b85a4e19811da0cf565633471b05726e72749bd0": "切换到上一个会话",
+      "24:9866d0f6f92672e8e81d7d863810ca05eacb513fd76c17ed6b034e5039504054": "切换到下一个会话",
+      "20:5123c3a666fea7e16222bbc5e905524a191f7a48c5257b17af3eb346c38d54df": "上移会话",
+      "22:7d9df89ce268fb788967ef7c8baf9caad7081f04da7328f13431dcd523d4c05b": "下移会话",
+      "23:9b67d923a2f2a7a8cdecb664ecfff7a0daf82711cc825b2f32d786b00c523a1c": "上一个侧面板标签页",
+      "19:698832dbbb1cfb0f3fe10db8d173d074713d9b4f712f32358a0ef090b7072739": "下一个侧面板标签页",
+      "23:0511892c42ea31fd25e12c030f9f63fa07764ecc6ddf5a6b88a81f0360a5a91f": "打开快捷键设置",
+      "13:3f940108cb1ecd9c0090da0b51b45f9fe673f00b22c7ffe3d013319b97456674": "打开设置",
+      "11:adc42d0dd89fd486efb9e50837b2d804fdad2d43e7724ef47888473f87e6fd4d": "聚焦输入框",
+      "34:9e54f1ecdd2b0d2d74920f38b31af1094f63a60664749231b355d791da995553": "发送提示词（备用快捷键）",
+      "12:e4813fd58ccf5e81908a473908b2ffea073367e14438d8d25ee9ce90cc062d7b": "选择模型",
+      "14:1d4c17db52f714ab60482303089684ad946621f40958d2f8d1154e1515161032": "切换侧边栏",
+      "17:a18e5eb2b60cc7215e60067db8edc1e76ef80e928164067d36acbc0bc9506f92": "切换侧面板",
+      "21:a519d8252be71edc5b9007529dc14ee906e510974e8f3d2ee48c5724aaa50bf6": "切换概览面板",
+      "20:4a322e26fde59fb941c2507dbeb8ced9a9d4a44161bcde7ea48e982b6d3581cc": "搜索会话",
+      "11:c8f7a8cfe0dfa0206de9fd438d71d28703705bcc4dc3b3362dcbf75b43f3b10d": "添加到对话",
+      "21:77c9be7ef0912007a76b44f74d4f4ba0564ffd09a6ea95871a581c234b49b370": "全部恢复默认",
+      "31:92555e5a10c6820f7415759698ce5553cc3722b6ce6f35f76da6620bd143c16a": "将所有快捷键恢复默认",
+      "12:352520caed7411c9a7a4101018bf7ce79a6f60980c24ce9d8dca4d7ea1f2dd2e": "添加快捷键",
+      "15:3dc4d508c00ecafd7874a71b44a539768417fa3a87e4bf9e2870a5f3cf3cb8cb": "移除快捷键",
+      "31:e91144ad355940a442d8f79e65d03a0433cd1d4eeccad3cfbc9581dfd76fae39": "没有符合搜索条件的快捷键。",
+      "16:d34508eaa65a6f53b0b308cd58ea6c87cc35a9009d93e6b3e9cad73ea33566a0": "文件权限",
+      "17:71bd5d86640b95267df8fceed5eaf1d3248691b3f32aa2c02480b8c64f317644": "终端命令",
+      "19:9acc3e29cc9279ef9d5a3b033a3184ee0c8795958f81c5b1fe884fd59fe611d4": "网络权限",
+      "24:694838b51ab1a91a263f120f21359fef4910673d7401ad862538a5f2181eb733": "沙箱外命令",
+      "38:3fae85b47ca5bf6036b1bd4e2d227066324b48f2d1d72c5350fa247db7622bc7": "允许或禁止执行指定的终端命令。",
+      "24:230515513f6092a8c5b3310a8fc97914513c1bfc037df75438ce2f646a51bb2d": "沙箱外命令",
+      "47:c582fa19c2888ff86ad36fa2777ef03b460e14cf19a6be396b8128e5b60c431a": "设置允许在沙箱外执行的命令。",
+      "6:c3812fc4acb861d5182fc2b8155f327f736fbe5e5eb86a7bd7afcb6dc5497282": "移除",
+      "15:8fd7550713dafafb6ed7028a903c8e7953bf463f0516a4843797e18e385745de": "输入目标…",
+      "14:abccf1256df8e326c1c7f513a7f039f6dcb3d4121826db3764e097d54bb7794c": "例如 npm test",
+      "25:e1cb7ac4b22343890454a14eecc69ac7421a12a189ddfd7b2112380c385fd42a": "例如 https://example.com",
+      "17:5d0bf8166534cc66a5d2980946590a7b82946d488f148b26c746d9ad3a9a2b94": "例如 example.com"
+    },
+    "patterns": {
+      "modelPrefix": "23:03f34cb372909b6549e1af95545d96e24201d739497ea1c293fe40dae802cdc4",
+      "weekRefresh": "66:80cad12af5e4498c39d84dba2be0475c68de5d25d521d55be501e04752a3ead5",
+      "hourRefresh": "66:79c54a7aca23f683cb8bf7d9cebc5bf9594564a1236f7a5ee2b0cdaf9d46e2c4",
+      "addShortcut": "17:2225209f812325a684e46c9560de0e28d17816d5a6d70626a4acbb6ff744ba94",
+      "shortcut": "9:06e53ea893668d148bc7185f26ebe3517dcb6e33da4e574bf251d8b9264bc193",
+      "removeShortcut": "16:a521f064ccea309992d3e0b10873b43725607b2e6c6b0d1c5ce4ac0e30317e4f",
+      "functionalCancel": "6:19766ed6ccb2f4a32778eed80d1928d2c87a18d7c275ccb163ec6709d3eb2e27"
+    }
+  },
+  "native": {
+    "menu": {
+      "50009ce1da4d15e1c4a04024df691eed5f0d598e2c4c67092f205366d0adf99e": "文件",
+      "464c4ffd019e1e9691dcf0537c797353ef2b1c1d4833d3d463e5b74ae4547344": "编辑",
+      "dcc839a4015c4b7dd9db959a8f757833b8adb92462a751b973386e453c6d58a3": "视图",
+      "19734a1b58cabc22cae1f88493289ee94f40ff2b350f7f1b9f7011ea84096916": "窗口",
+      "b79cac926e0b2e347e72cc91d5174037c9e17ae7733fd7bdb570f71b10cd7bfc": "帮助",
+      "1ef7b10d98c101c5b4e9d550f6ce72bb2400f8ce4540ed93ad2a4973b9132325": "关于 Antigravity",
+      "9ed79ee9b2129b5dc855c5dcd9537fe2343827b4bbf565b81be08579342179d0": "检查更新",
+      "36962434c78a23c43dc0e6cd63ed520e0ffb8a31962bb3c526661989a81ab50b": "正在检查更新...",
+      "be6ee118f6ce86a8333153dae17b995d393c534b6d38363f5bd4382fd698d1f6": "正在下载更新...",
+      "8eb54569c89c260a2ee875d3b06e2fe592fe2bce4730230dc81a20fb1cf6e857": "重启以更新",
+      "60b516276c8b2dbd4248427a24e021ffeb57a4964090c0286749176cf84778bd": "偏好设置...",
+      "336c2129e234f83eaf6f9304c6e49d6ca13fe5acd3f1baf91e562223c8ff09d7": "设置...",
+      "604dce445e326d952308addc99bd3d0e3ffb0ed9a455e4aa0190641fc5facccc": "服务",
+      "dcc7dd523277c2ed1ff191088f97a4ed9ca408ff770ff96e203f0000377c984d": "隐藏 Antigravity",
+      "1753e2264a96a94b685c9b9bd14a77ea86e3360683da6557bcad530d020d4246": "隐藏其他",
+      "e1c32645f2f85a25ae64e38f306ded9b82771ab8ac4595e769f9410e632584f4": "显示全部",
+      "976d16df278c3b985b7591abc2d71d43c91c0708aa622439ec262ef5e0d1da2d": "退出 Antigravity",
+      "b3eb37acb66ba4bbe8fb1ba296815daf194be94f5a5fb50dab2fb5e4a57ba29e": "退出",
+      "7469c2f6ff3a372d4dba340197e92929a00bbf58e31b4fd18e5456ac9cce8d16": "新建窗口",
+      "32fd144c1f4b399d6437cdf06de3dbea637a981eb794a52930b392a91bd0527f": "关闭窗口",
+      "a8283ade31856f71220db0e6f60a257c6889dc4dad0f275f66ad44b9ed9bf8d5": "撤销",
+      "74273989b0966e2369b6d01aadb23af4ad6a9e724643fa88f2bde99202a36708": "重做",
+      "1f45f02561f41db9483cfc00675900237967b8e382b9750d33f677812fe70842": "剪切",
+      "e21f935f11d7e966dbbae78da9daa378fe8142a14e7c0cd7434183005faa6c5c": "复制",
+      "f3380f7b44bd70af2a369de6026bf2ca2a7b36fde9086935efcd62a0e379cc7a": "粘贴",
+      "7ccc3ec8c4885428258a7c0213ec8a96294d0b356787bc7d84dbbc4cbffb36bc": "粘贴并匹配样式",
+      "e2d0a54968ead24efc0dffa6ac78fc606dceec34a0f586177a74a54cc2272cf8": "删除",
+      "d1ec69e64b9609d089aae09f7adc5c566d2cd222f8d8325f0ab3b523f0ac2690": "全选",
+      "bdc090ec61e3fcfc65f469951dfe00f3f2ecfc6003c44deac8e05b7237092de6": "重新载入",
+      "04832e75cdf0cd7b2b05897f5c4f053e331f45740ab9a86dcceae98b240647be": "强制重新载入",
+      "d890aa724267d9dd4fc9be1952c122975a2cdfda6b56ff4553b4c637f30e3f1a": "替换",
+      "5aea6de7e2938fe550fb1ee7a28534649500d4b44008095eae83122363d1a32c": "显示替换选项",
+      "e6da51484e45e1e19e39a75a0902fae9e8ceb0814451eb49a2aa8061e8598a44": "智能引号",
+      "636e65e88a6a1ad56d949af36350c4bad949bf2e9697fbcd970267ce4bddf162": "智能破折号",
+      "5995083024ea04b5bfc0edcdb53be2eeaad320ec8e34560a854a8dc1c9e719de": "文本替换",
+      "3565fcc6c17d45588ce4986618ea131107b47864c7c34658c66f839e2ce06154": "朗读",
+      "a128d48b556150136ea91a0e82fad5a6967c74cbae8e5ace84e363c26967b0e9": "开始朗读",
+      "90bd64fe4933199f7cb2869d25ab888e3d8a089144b4ce3f39158a346de44596": "停止朗读",
+      "ef37f4e061bb04ce93b664ae81dda414dcd38bd3ce3acbecc5036c1599cf8bca": "实际大小",
+      "5a982cf9dc11b4ec88b6151a75c4b45e269a5694c941c3c4c96689bed0c7d312": "放大",
+      "24649ee0c7a92fd868db079f46ef6b58509081e8b0e8b9ed929606f33c62831d": "缩小",
+      "53e63ed06152028c6048a3906905b098c16c3eedf8b64f3d12a2d7e4899f9dd2": "进入全屏幕",
+      "d72e311c4ddaf4ac6f39136038420b3b01a9eefc09790efa74616ad8a65478d5": "最小化",
+      "509c517ede79fef060a5f3a109fd1f45951eef2c7970b25c20992011e36a4070": "缩放",
+      "7e64cb6a48176de0d6812f2acc5fe331108f3a7594e07479aac45a2bef4000d9": "前置全部窗口",
+      "7af023c43013b9a53fbff7dd4b5821588bba3319308878229740489152c43f6d": "帮助文档",
+      "ea5ba511ca19b3d201de5515971a41be99e59e85feea1042a5f0d36a65411c4e": "连接到 WSL",
+      "cdfae9bd0353832587b987ec50caa9a3acb500fbdaf830765a0bff11041633e3": "在本地重新打开"
+    },
+    "main": {
+      "label": {
+        "e8df953c2c91f90dcd048e080131b8d342692e24147f6942bdb8fbecd3fde4a1": "新建窗口",
+        "e6d35a83820f0e3e1774fcc644085bff0bbe32d0fbc8333c76a73c77371144e0": "无运行中的智能体",
+        "15f691cea62ac3041eee176b55d4cb09408c5d03f7eeb1f585c7254d735e6535": "打开 ",
+        "f9c3a8198462318b60c9ba330ab6dd3cd0ec486270ea20a8cad89d6cfc6b3749": "退出"
+      },
+      "title": {
+        "0d4419d7f494ef7191a9f5808eb4897c40f7a4194844dc9b9171ab72bc9506af": "确认退出"
+      },
+      "message": {
+        "99bc5d6129dd9664b9f59d1f27aec956f01ad89c75e471134fd38e90929a8f22": "确定要退出吗？"
+      },
+      "detail": {
+        "4415e06c2ba3ddb5c439ffc4b4db9f5d31ccbe7e8cf9cd00d381eca2824f7a8a": "可能仍有智能体或后台任务正在运行。"
+      },
+      "buttons": {
+        "85b0bc69975b11edcaa0bfe962b340733a4e37c3c590304ca38698270793e5ec": [
+          "取消",
+          "退出"
+        ]
+      }
+    },
+    "updater": {
+      "eafb71aa1c9f8836885e04c11f4a5da0fcd319fb430c4a1114d194d3cd8f8519": "检查更新",
+      "c220fe9861e1c2e406c196c2bf821c45d5c24d9cbb599a402d65a548ca6dbbf0": "正在检查更新...",
+      "184f6503fb46b2fdce429465a3cd5c930870af077860b0b0c8f58da4a8990c3a": "正在下载更新...",
+      "ba77d9378d876ae4331af85ac574db5444632148cd0950a4ec9f5fd1290e0ad3": "重启以更新"
+    },
+    "tray": {
+      "357d9ecab98597dcf45f630dab17a179313b6f86a249d7e35559e09f5a8745fb": [
+        "无运行中的智能体",
+        " 个智能体运行中"
+      ]
+    }
+  }
+}

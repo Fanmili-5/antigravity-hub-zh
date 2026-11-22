@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__PET_NAME__ · 桌宠预览</title>
+<style>
+  :root {
+    color-scheme: light;
+    --ink: #1c3033;
+    --muted: #456268;
+    --accent: #145e58;
+    --border: #cededb;
+    --atlas: url("data:image/png;base64,__ATLAS__");
+  }
+  * { box-sizing: border-box }
+  body { margin: 0; color: var(--ink); background: #edf4f1; font: 16px/1.5 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif }
+  main { max-width: 980px; margin: auto; padding: clamp(28px, 6vw, 72px) 24px }
+  header { display: flex; align-items: end; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 24px }
+  h1 { font-size: clamp(30px, 6vw, 52px); line-height: 1.15; margin: 0 0 8px; letter-spacing: -.04em; overflow-wrap: anywhere }
+  p { margin: 0; color: var(--muted) }
+  button { font: inherit; cursor: pointer; color: inherit }
+  button:focus-visible { outline: 3px solid #25867a; outline-offset: 3px }
+  .decor { border: 1px solid var(--border); border-radius: 24px; overflow: clip; background: #fff }
+  .stage {
+    display: grid; place-items: center; min-height: 355px;
+    background: radial-gradient(ellipse at 50% 70%, #41746c 0%, #244649 50%, #1b303d 100%);
+    color: white; transition: background .18s;
+  }
+  .stage[data-light] { background: radial-gradient(ellipse at 50% 70%, #fefdf5 0%, #d8ebe0 67%, #ccdfeb 100%); color: var(--ink) }
+  .display { position: relative; width: 100%; min-width: 0; display: grid; place-items: center }
+  .display::before { content: ""; position: absolute; bottom: 27px; width: 104px; height: 18px; border-radius: 50%; background: #061d23; opacity: .22; filter: blur(6px) }
+  .sprite { aspect-ratio: 1; width: min(73vw, 305px); background-image: var(--atlas); background-repeat: no-repeat; background-size: 100% 100%; z-index: 1 }
+  .poses .sprite { background-size: 200% 200% }
+  .poses [data-state="thinking"] > .sprite { background-position: 100% 0 }
+  .poses [data-state="done"] > .sprite { background-position: 0 100% }
+  .poses [data-state="error"] > .sprite { background-position: 100% 100% }
+  .display[data-state="idle"] .sprite { animation: breathe 2.8s ease-in-out infinite }
+  .display[data-state="thinking"] .sprite { animation: ponder 2s ease-in-out infinite }
+  .display[data-state="done"] .sprite { animation: cheer 740ms cubic-bezier(.22,.85,.45,1) 1 }
+  .display[data-state="error"] .sprite { animation: shake 390ms ease-out 1 }
+  @keyframes breathe { 50% { transform: translateY(-4px) rotate(1.2deg) } }
+  @keyframes ponder { 30% { transform: translateY(-5px) rotate(-2deg) } 70% { transform: translateY(2px) rotate(2deg) } }
+  @keyframes cheer { 28% { transform: translateY(-23px) rotate(3deg) scale(1.03) } 60% { transform: translateY(0) } 78% { transform: translateY(-6px) } }
+  @keyframes shake { 15%, 55% { transform: translateX(-5px) } 35%, 75% { transform: translateX(5px) } }
+  .activity { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding: 16px }
+  .activity button, .backdrop { border: 1px solid var(--border); background: #f6faf8; border-radius: 12px; padding: 9px 12px }
+  .activity button { display: grid; justify-items: center; white-space: nowrap; min-width: 0 }
+  .activity button[aria-pressed="true"] { color: var(--accent); background: #e1f2e9; border-color: #5daa9b; font-weight: 650 }
+  .activity .sprite { width: clamp(39px, 8vw, 79px); z-index: 0; transform: scale(1.12) }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important } }
+  @media (max-width: 460px) { main { padding: 24px 12px } .stage { min-height: 275px } .activity { gap: 5px; padding: 8px } .activity button { font-size: 12px; padding: 6px } }
+</style>
+</head>
+<body>
+<main class="__MODE__">
+  <header>
+    <div><h1>__PET_NAME__</h1><p>桌宠预览</p></div>
+    <button type="button" class="backdrop" aria-pressed="false">切换浅色背景</button>
+  </header>
+  <section class="decor" aria-label="预览桌宠动画">
+    <div class="stage">
+      <div class="display" data-state="idle" role="img" aria-label="待机"><span class="sprite" aria-hidden="true"></span></div>
+    </div>
+    <div class="activity" aria-label="桌宠状态">
+      <button type="button" data-state="idle" aria-pressed="true"><span class="sprite" aria-hidden="true"></span>待机</button>
+      <button type="button" data-state="thinking" aria-pressed="false"><span class="sprite" aria-hidden="true"></span>正在思考</button>
+      <button type="button" data-state="done" aria-pressed="false"><span class="sprite" aria-hidden="true"></span>完成</button>
+      <button type="button" data-state="error" aria-pressed="false"><span class="sprite" aria-hidden="true"></span>需查看</button>
+    </div>
+  </section>
+</main>
+<script>
+  const stage = document.querySelector(".stage");
+  const display = document.querySelector(".display");
+  const buttons = [...document.querySelectorAll(".activity button")];
+  for (const button of buttons) {
+    button.addEventListener("click", () => {
+      for (const sibling of buttons) sibling.setAttribute("aria-pressed", String(sibling === button));
+      const state = button.dataset.state;
+      if (display.dataset.state === state) {
+        const sprite = display.firstElementChild;
+        sprite.getAnimations().forEach(animation => { animation.currentTime = 0; animation.play(); });
+      } else {
+        display.dataset.state = state;
+      }
+      display.setAttribute("aria-label", button.textContent.trim());
+    });
+  }
+  const backdrop = document.querySelector(".backdrop");
+  backdrop.addEventListener("click", () => {
+    const light = stage.toggleAttribute("data-light");
+    backdrop.setAttribute("aria-pressed", String(light));
+    backdrop.textContent = light ? "切换深色背景" : "切换浅色背景";
+  });
+</script>
+</body>
+</html>

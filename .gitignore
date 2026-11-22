@@ -1,0 +1,12 @@
+.DS_Store
+__pycache__/
+node_modules/
+extracted/
+*.app/
+*.asar
+*.asar.*
+*.dmg
+patch-manifest.json
+.previous-build.*/
+dist/
+*.zip
